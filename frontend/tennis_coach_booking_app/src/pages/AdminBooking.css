@@ -1,0 +1,171 @@
+/* Admin Booking Page Additional Styles */
+.admin-booking {
+  background-color: #e0e0e0;
+}
+
+.admin-header {
+  background-color: #37474f;
+}
+
+.admin-badge {
+  background-color: #ff7043;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.admin-legend {
+  background-color: #fafafa;
+}
+
+.legend-instruction {
+  margin-left: auto;
+  color: #888;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Access Denied */
+.access-denied {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 40px;
+}
+
+.access-denied h2 {
+  color: #c62828;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.access-denied p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.access-denied button {
+  padding: 12px 30px;
+  background-color: #4a4a4a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.access-denied button:hover {
+  background-color: #333;
+}
+
+/* Admin Cell */
+.admin-cell {
+  position: relative;
+  cursor: pointer;
+}
+
+.admin-cell:hover {
+  opacity: 0.8;
+}
+
+.admin-cell.selected {
+  outline: 3px solid #2196f3;
+  z-index: 5;
+}
+
+/* Status Popup */
+.status-popup {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  padding: 8px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 100px;
+}
+
+.status-popup::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+
+.status-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.status-btn:hover {
+  opacity: 0.85;
+}
+
+.available-btn {
+  background-color: #e8e8e8;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.booked-btn {
+  background-color: #ef5350;
+  color: white;
+}
+
+.held-btn {
+  background-color: #ffa726;
+  color: white;
+}
+
+/* Override admin cell hover colors */
+.admin-cell.available:hover {
+  background-color: #e3f2fd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-badge {
+    display: none;
+  }
+
+  .legend-instruction {
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .admin-legend {
+    flex-wrap: wrap;
+  }
+
+  .status-popup {
+    min-width: 80px;
+  }
+
+  .status-btn {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+}

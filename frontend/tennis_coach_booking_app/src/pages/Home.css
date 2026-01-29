@@ -1,0 +1,427 @@
+/* Home Page Styles - Gray background with Green accent */
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #e8e8e8;
+}
+
+/* Header */
+.header {
+  background-color: #4a4a4a;
+  padding: 15px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* User Menu */
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-name {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.admin-button {
+  background-color: #ff7043;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.admin-button:hover {
+  background-color: #f4511e;
+}
+
+.logout-button {
+  background-color: transparent;
+  color: #ccc;
+  border: 1px solid #666;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #555;
+  color: white;
+  border-color: #888;
+}
+
+.login-button-header {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-button-header:hover {
+  background-color: #1b5e20;
+}
+
+.logo {
+  width: 45px;
+  height: 45px;
+  background-color: #2e7d32;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-number {
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.header h1 {
+  color: white;
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Section Title */
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title h2 {
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.title-underline {
+  width: 60px;
+  height: 4px;
+  background-color: #2e7d32;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* Coach Card - 5:3 ratio */
+.coach-card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.card-top {
+  display: flex;
+  align-items: stretch;
+  padding: 30px;
+  gap: 30px;
+  background: linear-gradient(135deg, #f5f5f5 0%, #eeeeee 100%);
+  min-height: 200px;
+}
+
+/* Coach Photo - White circle */
+.coach-photo-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coach-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #2e7d32;
+}
+
+.coach-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Coach Credentials */
+.coach-credentials {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.coach-name {
+  font-size: 1.6rem;
+  color: #333;
+  margin: 0 0 5px 0;
+  font-weight: 700;
+}
+
+.coach-title {
+  color: #2e7d32;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.credentials-divider {
+  width: 40px;
+  height: 3px;
+  background-color: #2e7d32;
+  margin: 10px 0 15px;
+  border-radius: 2px;
+}
+
+.credentials-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 30px;
+}
+
+.credentials-list li {
+  color: #555;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  line-height: 1.4;
+  break-inside: avoid;
+}
+
+.credentials-list li.credentials-section-title {
+  color: #2e7d32;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.credentials-list li.credentials-section-title:first-child {
+  margin-top: 0;
+}
+
+/* Card Bottom - Introduction */
+.card-bottom {
+  padding: 25px 30px;
+  background-color: #4a4a4a;
+  color: white;
+}
+
+.card-bottom h4 {
+  font-size: 1rem;
+  margin: 0 0 12px 0;
+  color: #2e7d32;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-bottom h4::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 16px;
+  background-color: #2e7d32;
+  border-radius: 2px;
+}
+
+.card-bottom p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #ddd;
+  margin: 0;
+}
+
+/* Booking Button */
+.booking-button-wrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.booking-button {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 15px 60px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+}
+
+.booking-button:hover {
+  background-color: #1b5e20;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+}
+
+.booking-button:active {
+  transform: translateY(0);
+}
+
+/* Footer */
+.footer {
+  background-color: #3a3a3a;
+  padding: 20px;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.footer-divider {
+  color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-content {
+    flex-wrap: wrap;
+  }
+
+  .user-menu {
+    gap: 8px;
+  }
+
+  .user-name {
+    display: none;
+  }
+
+  .admin-button,
+  .logout-button,
+  .login-button-header {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .card-top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px 20px;
+  }
+
+  .coach-photo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .credentials-divider {
+    margin: 10px auto 15px;
+  }
+
+  .credentials-list {
+    columns: 1;
+  }
+
+  .coach-name {
+    font-size: 1.4rem;
+  }
+
+  .card-bottom {
+    padding: 20px;
+  }
+
+  .section-title h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 30px 15px;
+  }
+
+  .header-content {
+    gap: 10px;
+  }
+
+  .header h1 {
+    font-size: 1.2rem;
+  }
+
+  .logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .logo-number {
+    font-size: 0.85rem;
+  }
+
+  .coach-photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .credentials-list li {
+    font-size: 0.8rem;
+  }
+
+  .card-bottom p {
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,317 @@
+/* Booking Page Styles */
+.booking {
+  min-height: 100vh;
+  background-color: #e8e8e8;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* Header */
+.booking-header {
+  background-color: #4a4a4a;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.back-button {
+  background-color: transparent;
+  border: 1px solid #888;
+  color: #ddd;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #555;
+  border-color: #aaa;
+}
+
+.booking-header h1 {
+  color: white;
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Legend */
+.booking-legend {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.legend-color {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.legend-color.available {
+  background-color: white;
+}
+
+.legend-color.booked {
+  background-color: #ef5350;
+  border-color: #ef5350;
+}
+
+.legend-color.held {
+  background-color: #ffa726;
+  border-color: #ffa726;
+}
+
+/* Week Navigation */
+.week-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.nav-button {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nav-button:hover {
+  background-color: #1b5e20;
+}
+
+.week-range {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  min-width: 180px;
+  text-align: center;
+}
+
+/* Booking Table */
+.booking-table-wrapper {
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.booking-table {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.booking-table th,
+.booking-table td {
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Table Header */
+.time-header {
+  background-color: #4a4a4a;
+  color: white;
+  padding: 15px 10px;
+  font-weight: 600;
+  width: 80px;
+  min-width: 80px;
+}
+
+.day-header {
+  background-color: #4a4a4a;
+  color: white;
+  padding: 10px 5px;
+  font-weight: 500;
+  min-width: 100px;
+}
+
+.day-name {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.day-date {
+  font-size: 0.8rem;
+  color: #bbb;
+  margin-top: 2px;
+}
+
+/* Time Cell */
+.time-cell {
+  background-color: #f5f5f5;
+  color: #555;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 8px;
+}
+
+/* Booking Cells */
+.booking-cell {
+  padding: 12px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.75rem;
+  font-weight: 500;
+  height: 40px;
+}
+
+/* Available - 흰색 (예약 가능) */
+.booking-cell.available {
+  background-color: white;
+  color: transparent;
+}
+
+.booking-cell.available:hover {
+  background-color: #42a5f5;
+  color: white;
+}
+
+.booking-cell.available:hover::after {
+  content: '예약';
+}
+
+/* Booked - 빨간색 (예약 완료) */
+.booking-cell.booked {
+  background-color: #ef5350;
+  color: white;
+  cursor: not-allowed;
+}
+
+.booking-cell.booked:hover {
+  background-color: #e53935;
+}
+
+/* Held - 주황색 (코치 임시 예약) */
+.booking-cell.held {
+  background-color: #ffa726;
+  color: white;
+  cursor: not-allowed;
+}
+
+.booking-cell.held:hover {
+  background-color: #fb8c00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .booking-legend {
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .legend-item {
+    font-size: 0.8rem;
+  }
+
+  .legend-color {
+    width: 20px;
+    height: 20px;
+  }
+
+  .week-navigation {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-button {
+    padding: 10px 30px;
+  }
+
+  .booking-table-wrapper {
+    padding: 10px;
+  }
+
+  .day-header {
+    min-width: 60px;
+    padding: 8px 3px;
+  }
+
+  .day-name {
+    font-size: 0.9rem;
+  }
+
+  .day-date {
+    font-size: 0.7rem;
+  }
+
+  .time-header {
+    width: 60px;
+    min-width: 60px;
+    padding: 10px 5px;
+    font-size: 0.85rem;
+  }
+
+  .time-cell {
+    font-size: 0.75rem;
+    padding: 6px;
+  }
+
+  .booking-cell {
+    padding: 8px 4px;
+    font-size: 0.65rem;
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-header {
+    padding: 12px 15px;
+    gap: 15px;
+  }
+
+  .booking-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .back-button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .day-header {
+    min-width: 45px;
+  }
+
+  .day-name {
+    font-size: 0.8rem;
+  }
+
+  .day-date {
+    font-size: 0.65rem;
+  }
+
+  .time-header,
+  .time-cell {
+    width: 50px;
+    min-width: 50px;
+    font-size: 0.7rem;
+  }
+}
