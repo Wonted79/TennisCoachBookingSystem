@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="907299e6-10eb-4eee-af3d-55e403ec98dd" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/eslint.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/public/vite.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/App.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/assets/coach_profile.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/context/AuthContext.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/main.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/AdminBooking.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/AdminBooking.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Booking.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Booking.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/ForgotPassword.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/ForgotPassword.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Home.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Home.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Login.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Register.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Register.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/vite.config.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="26" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/tcb_server">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tcb_server" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="38xgPxBtkYmeb4onHt5MtKV8EFi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/CUBOX/Desktop/이계승/TennisCoachBooking/backend/tcb_server",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "모듈",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="TcbServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="com.tcb_server.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tcb_server.TcbServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="907299e6-10eb-4eee-af3d-55e403ec98dd" name="변경" comment="" />
+      <created>1769746615900</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1769746615900</updated>
+      <workItem from="1769746617063" duration="1214000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
