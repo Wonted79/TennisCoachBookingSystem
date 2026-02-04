@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="907299e6-10eb-4eee-af3d-55e403ec98dd" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +111,7 @@
       <option name="presentableId" value="Default" />
       <updated>1769746615900</updated>
       <workItem from="1769746617063" duration="1214000" />
-      <workItem from="1770176107249" duration="12500000" />
+      <workItem from="1770176107249" duration="13807000" />
     </task>
     <servers />
   </component>

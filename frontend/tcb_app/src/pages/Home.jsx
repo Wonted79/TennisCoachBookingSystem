@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { BookOpen, Instagram, Youtube } from 'lucide-react';
 import './Home.css';
 import coachProfile from '../assets/coach_profile.jpg';
 
@@ -116,6 +117,37 @@ function Home() {
           >
             예약하기
           </button>
+        </div>
+
+        {/* Social Media Links */}
+        <div className="social-links">
+          <a
+            href="https://blog.naver.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-link-button"
+            aria-label="Blog 링크"
+          >
+            <BookOpen size={24} />
+          </a>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-link-button"
+            aria-label="Instagram 링크"
+          >
+            <Instagram size={24} />
+          </a>
+          <a
+            href="https://www.youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-link-button"
+            aria-label="YouTube 링크"
+          >
+            <Youtube size={24} />
+          </a>
         </div>
       </main>
 
