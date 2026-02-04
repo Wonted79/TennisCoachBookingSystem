@@ -8,20 +8,27 @@ export function AuthProvider({ children }) {
     return saved ? JSON.parse(saved) : null;
   });
 
-  const login = (username, password) => {
-    // 샘플 계정 (실제로는 API 호출)
-    if (username === 'admin' && password === 'admin123') {
-      const userData = { username, role: 'admin', name: '이교헌 코치' };
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      return { success: true, user: userData };
-    } else if (username === 'user' && password === 'user123') {
-      const userData = { username, role: 'user', name: '회원' };
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      return { success: true, user: userData };
+  const login = async (loginId, password) => {
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ loginId, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        const userData = { id: data.id, name: data.name, role: data.role };
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+        return { success: true, user: userData };
+      }
+
+      return { success: false, message: data.message };
+    } catch {
+      return { success: false, message: '서버에 연결할 수 없습니다.' };
     }
-    return { success: false, message: '아이디 또는 비밀번호가 올바르지 않습니다.' };
   };
 
   const logout = () => {
@@ -30,7 +37,7 @@ export function AuthProvider({ children }) {
   };
 
   const isAdmin = () => {
-    return user?.role === 'admin';
+    return user?.role === 'ADMIN';
   };
 
   return (

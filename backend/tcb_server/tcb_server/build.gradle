@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '4.0.2'
+	id 'org.springframework.boot' version '3.3.8'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -8,6 +8,7 @@ group = 'com'
 version = '0.0.1-SNAPSHOT'
 description = 'Demo project for Spring Boot'
 
+//자바17 버전
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
@@ -25,11 +26,16 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	//mybatis
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
-	runtimeOnly 'com.mysql:mysql-connector-j'
+	//maria_DB
+	implementation 'org.mariadb.jdbc:mariadb-java-client'
+	//lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

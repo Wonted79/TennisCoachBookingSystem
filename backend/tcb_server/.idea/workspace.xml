@@ -5,32 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="907299e6-10eb-4eee-af3d-55e403ec98dd" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/eslint.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/public/vite.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/App.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/assets/coach_profile.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/context/AuthContext.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/main.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/AdminBooking.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/AdminBooking.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Booking.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Booking.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/ForgotPassword.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/ForgotPassword.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Home.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Home.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Login.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Register.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/src/pages/Register.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tennis_coach_booking_app/vite.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +20,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="26" />
+    <option name="cachedIndexableFilesCount" value="32" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExternalProjectsData">
@@ -70,9 +52,9 @@
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="38xgPxBtkYmeb4onHt5MtKV8EFi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -80,12 +62,18 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.tcb_server 빌드.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.TcbServerApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
@@ -129,6 +117,7 @@
       <option name="presentableId" value="Default" />
       <updated>1769746615900</updated>
       <workItem from="1769746617063" duration="1214000" />
+      <workItem from="1770176107249" duration="12500000" />
     </task>
     <servers />
   </component>

@@ -21,7 +21,7 @@ function Login() {
     setError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.username || !formData.password) {
@@ -29,7 +29,7 @@ function Login() {
       return;
     }
 
-    const result = login(formData.username, formData.password);
+    const result = await login(formData.username, formData.password);
     if (result.success) {
       navigate('/');
     } else {
@@ -88,15 +88,6 @@ function Login() {
 
         <div className="login-back">
           <Link to="/">← 홈으로 돌아가기</Link>
-        </div>
-
-        {/* 테스트 계정 안내 */}
-        <div className="test-accounts">
-          <p>테스트 계정</p>
-          <div className="account-info">
-            <span>관리자: admin / admin123</span>
-            <span>회원: user / user123</span>
-          </div>
         </div>
       </div>
     </div>
