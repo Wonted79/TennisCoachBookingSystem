@@ -31,7 +31,6 @@ AuthService {
         return LoginResponse.builder()
                 .id(user.getId())
                 .name(user.getName())
-                .role(user.getRole())
                 .build();
     }
 }

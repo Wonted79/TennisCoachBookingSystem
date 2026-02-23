@@ -5,8 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="907299e6-10eb-4eee-af3d-55e403ec98dd" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/domain/AdminUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/domain/AdminUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/dto/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/dto/LoginResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/mapper/auth/AdminUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/mapper/auth/AdminUserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/context/AuthContext.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/context/AuthContext.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/AdminBooking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/AdminBooking.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/Booking.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/Booking.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/Booking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/Booking.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/Home.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +27,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="32" />
+    <option name="cachedIndexableFilesCount" value="39" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExternalProjectsData">
@@ -39,6 +52,14 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
@@ -50,42 +71,45 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="38xgPxBtkYmeb4onHt5MtKV8EFi" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.tcb_server 빌드.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Spring Boot.TcbServerApplication.executor": "Run",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/CUBOX/Desktop/이계승/TennisCoachBooking/backend/tcb_server",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "모듈",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.tcb_server 빌드.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Spring Boot.TcbServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/CUBOX/Desktop/이계승/TennisCoachBooking/backend/tcb_server&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="TcbServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="com.tcb_server.main" />
@@ -111,7 +135,10 @@
       <option name="presentableId" value="Default" />
       <updated>1769746615900</updated>
       <workItem from="1769746617063" duration="1214000" />
-      <workItem from="1770176107249" duration="13807000" />
+      <workItem from="1770176107249" duration="19385000" />
+      <workItem from="1771211788449" duration="4560000" />
+      <workItem from="1771463713701" duration="3407000" />
+      <workItem from="1771831928114" duration="4448000" />
     </task>
     <servers />
   </component>

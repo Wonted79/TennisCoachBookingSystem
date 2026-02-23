@@ -11,5 +11,5 @@ public class AdminUser {
     private String loginId;
     private String password;
     private String name;
-    private String role;
+
 }

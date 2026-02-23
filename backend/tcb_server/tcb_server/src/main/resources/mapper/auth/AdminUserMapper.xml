@@ -5,8 +5,8 @@
 <mapper namespace="com.tcb_server.auth.mapper.AdminUserMapper">
 
     <select id="findByLoginId" resultType="com.tcb_server.auth.domain.AdminUser">
-        SELECT id, login_id, password, name, role
-        FROM admin_user
+        SELECT id, login_id, password, name
+        FROM admin
         WHERE login_id = #{loginId}
     </select>
 
