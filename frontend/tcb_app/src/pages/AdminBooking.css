@@ -74,73 +74,202 @@
   opacity: 0.8;
 }
 
-.admin-cell.selected {
-  outline: 3px solid #2196f3;
-  z-index: 5;
+.cell-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: white;
+  display: block;
+  text-align: center;
+  line-height: 1.2;
 }
 
-/* Status Popup */
-.status-popup {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  padding: 8px;
-  z-index: 100;
+/* Status Toggle Buttons */
+.status-toggle {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  min-width: 100px;
+  gap: 8px;
 }
 
-.status-popup::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid white;
-}
-
-.status-btn {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 500;
+.toggle-btn {
+  flex: 1;
+  padding: 10px 0;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s ease;
-  white-space: nowrap;
+  transition: all 0.2s;
+  background-color: #f5f5f5;
+  color: #999;
 }
 
-.status-btn:hover {
-  opacity: 0.85;
-}
-
-.available-btn {
-  background-color: #e8e8e8;
-  color: #333;
-  border: 1px solid #ccc;
-}
-
-.booked-btn {
+.toggle-booked.active {
   background-color: #ef5350;
+  border-color: #ef5350;
   color: white;
 }
 
-.held-btn {
+.toggle-held.active {
   background-color: #ffa726;
+  border-color: #ffa726;
   color: white;
+}
+
+.toggle-btn:hover {
+  opacity: 0.85;
 }
 
 /* Override admin cell hover colors */
 .admin-cell.available:hover {
   background-color: #e3f2fd;
+}
+
+/* ===== Modal Styles ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 440px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #999;
+  padding: 4px 8px;
+}
+
+.modal-close:hover {
+  color: #333;
+}
+
+.modal-info {
+  padding: 10px 24px;
+  background-color: #f5f5f5;
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.modal-form {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.form-group input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #42a5f5;
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.15);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  padding: 16px 24px 20px;
+  border-top: 1px solid #eee;
+}
+
+.btn-save {
+  flex: 1;
+  padding: 11px 0;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-save:hover {
+  background-color: #1b5e20;
+}
+
+.btn-delete {
+  padding: 11px 20px;
+  background-color: #ef5350;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: #c62828;
+}
+
+.btn-cancel {
+  padding: 11px 20px;
+  background-color: #e0e0e0;
+  color: #555;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+  background-color: #bdbdbd;
 }
 
 /* Responsive */
@@ -160,12 +289,16 @@
     flex-wrap: wrap;
   }
 
-  .status-popup {
-    min-width: 80px;
+  .modal-content {
+    width: 95%;
+    max-height: 90vh;
   }
 
-  .status-btn {
-    padding: 6px 10px;
-    font-size: 0.7rem;
+  .modal-form {
+    padding: 12px 16px;
+  }
+
+  .modal-actions {
+    padding: 12px 16px 16px;
   }
 }

@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
       const data = await res.json();
 
       if (res.ok) {
-        const userData = { id: data.id, name: data.name, role: data.role };
+        const userData = { id: data.id, name: data.name };
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
         return { success: true, user: userData };
@@ -36,12 +36,10 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('user');
   };
 
-  const isAdmin = () => {
-    return user?.role === 'ADMIN';
-  };
+  const isAuthenticated = !!user;
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAdmin }}>
+    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );

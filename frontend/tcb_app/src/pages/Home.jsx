@@ -6,7 +6,7 @@ import coachProfile from '../assets/coach_profile.jpg';
 
 function Home() {
   const navigate = useNavigate();
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout } = useAuth();
 
   const coachInfo = {
     name: '이교헌',
@@ -47,14 +47,12 @@ function Home() {
             {user ? (
               <div className="user-menu">
                 <span className="user-name">{user.name}님</span>
-                {isAdmin() && (
-                  <button
-                    className="admin-button"
-                    onClick={() => navigate('/admin/booking')}
-                  >
-                    예약 관리
-                  </button>
-                )}
+                <button
+                  className="admin-button"
+                  onClick={() => navigate('/admin/booking')}
+                >
+                  예약 관리
+                </button>
                 <button className="logout-button" onClick={handleLogout}>
                   로그아웃
                 </button>

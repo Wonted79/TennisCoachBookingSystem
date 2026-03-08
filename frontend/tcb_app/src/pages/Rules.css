@@ -1,0 +1,160 @@
+/* Rules Page Styles */
+.rules {
+  min-height: 100vh;
+  background-color: #e8e8e8;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* Header */
+.rules-header {
+  background-color: #4a4a4a;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.rules-header h1 {
+  color: white;
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Content */
+.rules-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* Rules Card */
+.rules-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.rules-card-title {
+  background-color: #4a4a4a;
+  color: white;
+  margin: 0;
+  padding: 14px 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-left: 4px solid #2e7d32;
+}
+
+.rules-card-body {
+  padding: 20px 24px;
+}
+
+.rules-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rules-list li {
+  position: relative;
+  padding: 8px 0 8px 20px;
+  color: #444;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.rules-list li:last-child {
+  border-bottom: none;
+}
+
+.rules-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 6px;
+  height: 6px;
+  background-color: #2e7d32;
+  border-radius: 50%;
+}
+
+.rules-list li strong {
+  color: #2e7d32;
+}
+
+/* Booking Button */
+.rules-booking-wrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.rules-booking-button {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 15px 60px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+}
+
+.rules-booking-button:hover {
+  background-color: #1b5e20;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+}
+
+.rules-booking-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .rules-content {
+    padding: 20px 16px;
+  }
+
+  .rules-card-title {
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+
+  .rules-card-body {
+    padding: 16px 20px;
+  }
+
+  .rules-list li {
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rules-header {
+    padding: 12px 15px;
+    gap: 15px;
+  }
+
+  .rules-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .rules-content {
+    padding: 16px 12px;
+  }
+
+  .rules-card-body {
+    padding: 14px 16px;
+  }
+
+  .rules-list li {
+    font-size: 0.84rem;
+    padding: 7px 0 7px 18px;
+  }
+}

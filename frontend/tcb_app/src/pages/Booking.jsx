@@ -1,12 +1,13 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Megaphone, Phone, BookOpen, ShieldCheck } from 'lucide-react';
 import './Booking.css';
 
 // 예약 상태 상수
 const BOOKING_STATUS = {
   AVAILABLE: 'available',      // 흰색 - 예약 가능
-  BOOKED: 'booked',           // 빨간색 - 다른 사람이 예약
-  HELD: 'held',               // 주황색 - 코치가 임시 예약
+  BOOKED: 'booked',           // 빨간색 - 예약 완료
+  HELD: 'held',               // 주황색 - 임시 예약
 };
 
 function Booking() {
@@ -19,6 +20,9 @@ function Booking() {
     const diff = today.getDate() - day + (day === 0 ? -6 : 1);
     return new Date(today.setDate(diff));
   });
+
+  // 예약 데이터 (서버에서 로드)
+  const [bookings, setBookings] = useState({});
 
   // 시간 슬롯 생성 (6:00 ~ 21:30, 30분 단위)
   const timeSlots = useMemo(() => {
@@ -49,45 +53,50 @@ function Booking() {
     });
   }, [weekStartDate]);
 
-  // 샘플 예약 데이터 (실제로는 API에서 가져옴)
-  const [bookings] = useState(() => {
-    const sampleBookings = {};
-    // 샘플 데이터: 일부 시간대를 예약됨/임시예약으로 설정
-    weekDates.forEach((dateInfo, dayIndex) => {
-      const dateKey = dateInfo.fullDate.toISOString().split('T')[0];
-      sampleBookings[dateKey] = {};
+  // 날짜를 YYYY-MM-DD 형식으로 변환
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
 
-      // 샘플 예약 데이터 추가
-      if (dayIndex === 0) { // 월요일
-        sampleBookings[dateKey]['09:00'] = BOOKING_STATUS.BOOKED;
-        sampleBookings[dateKey]['09:30'] = BOOKING_STATUS.BOOKED;
-        sampleBookings[dateKey]['14:00'] = BOOKING_STATUS.HELD;
+  // 주간 예약 데이터 로드
+  const loadWeekReservations = useCallback(async () => {
+    const startDate = formatDate(weekStartDate);
+    const endDate = new Date(weekStartDate);
+    endDate.setDate(weekStartDate.getDate() + 6);
+    const endDateStr = formatDate(endDate);
+
+    try {
+      const res = await fetch(
+        `/api/reservation/public/week?startDate=${startDate}&endDate=${endDateStr}`
+      );
+      if (res.ok) {
+        const data = await res.json();
+        // { 'YYYY-MM-DD': { 'HH:mm': 'BOOKED' | 'HELD' } } 형태로 변환
+        const mapped = {};
+        data.forEach((r) => {
+          if (!mapped[r.reservationDate]) {
+            mapped[r.reservationDate] = {};
+          }
+          mapped[r.reservationDate][r.reservationTime] =
+            r.status === 'HELD' ? BOOKING_STATUS.HELD : BOOKING_STATUS.BOOKED;
+        });
+        setBookings(mapped);
       }
-      if (dayIndex === 2) { // 수요일
-        sampleBookings[dateKey]['10:00'] = BOOKING_STATUS.BOOKED;
-        sampleBookings[dateKey]['10:30'] = BOOKING_STATUS.BOOKED;
-        sampleBookings[dateKey]['11:00'] = BOOKING_STATUS.BOOKED;
-        sampleBookings[dateKey]['16:00'] = BOOKING_STATUS.HELD;
-        sampleBookings[dateKey]['16:30'] = BOOKING_STATUS.HELD;
-      }
-      if (dayIndex === 4) { // 금요일
-        sampleBookings[dateKey]['08:00'] = BOOKING_STATUS.BOOKED;
-        sampleBookings[dateKey]['08:30'] = BOOKING_STATUS.BOOKED;
-        sampleBookings[dateKey]['15:00'] = BOOKING_STATUS.HELD;
-      }
-      if (dayIndex === 5) { // 토요일
-        sampleBookings[dateKey]['09:00'] = BOOKING_STATUS.BOOKED;
-        sampleBookings[dateKey]['09:30'] = BOOKING_STATUS.BOOKED;
-        sampleBookings[dateKey]['10:00'] = BOOKING_STATUS.BOOKED;
-        sampleBookings[dateKey]['10:30'] = BOOKING_STATUS.BOOKED;
-      }
-    });
-    return sampleBookings;
-  });
+    } catch (err) {
+      console.error('예약 데이터 로드 실패:', err);
+    }
+  }, [weekStartDate]);
+
+  useEffect(() => {
+    loadWeekReservations();
+  }, [loadWeekReservations]);
 
   // 예약 상태 가져오기
   const getBookingStatus = (dateInfo, time) => {
-    const dateKey = dateInfo.fullDate.toISOString().split('T')[0];
+    const dateKey = formatDate(dateInfo.fullDate);
     return bookings[dateKey]?.[time] || BOOKING_STATUS.AVAILABLE;
   };
 
@@ -103,19 +112,6 @@ function Booking() {
     const newDate = new Date(weekStartDate);
     newDate.setDate(weekStartDate.getDate() + 7);
     setWeekStartDate(newDate);
-  };
-
-  // 셀 클릭 핸들러
-  const handleCellClick = (dateInfo, time, status) => {
-    if (status === BOOKING_STATUS.AVAILABLE) {
-      const dateStr = `${dateInfo.month}월 ${dateInfo.date}일 (${dateInfo.day})`;
-      alert(`${dateStr} ${time} 예약을 진행하시겠습니까?`);
-      // 실제로는 예약 모달 또는 예약 확인 페이지로 이동
-    } else if (status === BOOKING_STATUS.BOOKED) {
-      alert('이미 예약된 시간입니다.');
-    } else if (status === BOOKING_STATUS.HELD) {
-      alert('코치가 임시로 예약한 시간입니다. 문의해 주세요.');
-    }
   };
 
   // 현재 표시 중인 주 텍스트
@@ -138,6 +134,40 @@ function Booking() {
         </button>
         <h1>레슨 예약</h1>
       </header>
+
+      {/* Announcement Banner */}
+      <div className="announcement-banner">
+        <div className="announcement-row">
+          <Megaphone size={18} />
+          <span className="announcement-text">
+            레슨 예약은 최소 하루 전까지 가능합니다. 당일 예약은 전화 문의 바랍니다.
+          </span>
+        </div>
+        <div className="announcement-row inquiry-row">
+          <Phone size={16} />
+          <span className="inquiry-text">
+            레슨 문의: 010-1234-5678
+          </span>
+        </div>
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="booking-nav-buttons">
+        <button
+          className="booking-nav-button"
+          onClick={() => navigate('/programs')}
+        >
+          <BookOpen size={18} />
+          프로그램 안내
+        </button>
+        <button
+          className="booking-nav-button"
+          onClick={() => navigate('/rules')}
+        >
+          <ShieldCheck size={18} />
+          레슨 규정
+        </button>
+      </div>
 
       {/* Legend */}
       <div className="booking-legend">
@@ -190,7 +220,6 @@ function Booking() {
                     <td
                       key={dayIndex}
                       className={`booking-cell ${status}`}
-                      onClick={() => handleCellClick(dateInfo, time, status)}
                     >
                       {status === BOOKING_STATUS.BOOKED && '예약'}
                       {status === BOOKING_STATUS.HELD && '임시'}

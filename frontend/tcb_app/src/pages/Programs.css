@@ -1,0 +1,160 @@
+/* Programs Page Styles */
+.programs {
+  min-height: 100vh;
+  background-color: #e8e8e8;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* Header */
+.programs-header {
+  background-color: #4a4a4a;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.programs-header h1 {
+  color: white;
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Content */
+.programs-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* Program Card */
+.program-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.program-card-title {
+  background-color: #4a4a4a;
+  color: white;
+  margin: 0;
+  padding: 14px 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-left: 4px solid #2e7d32;
+}
+
+.program-card-body {
+  padding: 20px 24px;
+}
+
+.program-desc {
+  color: #555;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin: 0 0 16px 0;
+}
+
+.program-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.program-details li {
+  color: #444;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.program-details li strong {
+  color: #2e7d32;
+}
+
+/* Booking Button */
+.programs-booking-wrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.programs-booking-button {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 15px 60px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+}
+
+.programs-booking-button:hover {
+  background-color: #1b5e20;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+}
+
+.programs-booking-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .programs-content {
+    padding: 20px 16px;
+  }
+
+  .program-card-title {
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+
+  .program-card-body {
+    padding: 16px 20px;
+  }
+
+  .program-desc {
+    font-size: 0.88rem;
+  }
+
+  .program-details {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .programs-header {
+    padding: 12px 15px;
+    gap: 15px;
+  }
+
+  .programs-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .programs-content {
+    padding: 16px 12px;
+  }
+
+  .program-card-body {
+    padding: 14px 16px;
+  }
+
+  .program-desc {
+    font-size: 0.84rem;
+  }
+
+  .program-details li {
+    font-size: 0.84rem;
+  }
+}

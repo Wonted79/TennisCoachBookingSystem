@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import AdminBooking from './pages/AdminBooking';
+import Programs from './pages/Programs';
+import Rules from './pages/Rules';
 import './App.css';
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/booking" element={<Booking />} />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/rules" element={<Rules />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
