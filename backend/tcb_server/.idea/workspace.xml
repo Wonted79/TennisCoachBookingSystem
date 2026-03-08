@@ -5,23 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="907299e6-10eb-4eee-af3d-55e403ec98dd" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/com.tcb_server.main.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/TcbServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/TcbServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/controller/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/controller/ReservationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/domain/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/domain/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/dto/ReservationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/dto/ReservationRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/dto/ReservationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/dto/ReservationResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/auth/service/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/mapper/auth/AdminUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/mapper/auth/AdminUserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/mapper/reservation/ReservationMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/mapper/reservation/ReservationMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/AdminBooking.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/AdminBooking.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/AdminBooking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/AdminBooking.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/Booking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/Booking.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +132,7 @@
       <workItem from="1771211788449" duration="4560000" />
       <workItem from="1771463713701" duration="3407000" />
       <workItem from="1771831928114" duration="4448000" />
-      <workItem from="1772938766794" duration="10620000" />
+      <workItem from="1772938766794" duration="11666000" />
     </task>
     <servers />
   </component>
