@@ -12,7 +12,12 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(final CorsRegistry registry) {
         registry.addMapping("/api/**")
+                .allowedOrigins(
+                        "https://tenniscoachbookingapp:80",  // 실제 프론트 배포 URL로 교체
+                        "http://localhost:5173"
+                )
                 .allowedMethods(ALLOWED_METHOD_NAMES.split(","))
+                .allowedHeaders("*")
                 .exposedHeaders(HttpHeaders.LOCATION);
     }
 }
