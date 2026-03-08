@@ -17,7 +17,7 @@ public class CorsConfig {
                 registry.addMapping("/**") // 모든 API 허용
                         .allowedOrigins(
                                 "http://localhost:5173", // 개발 React
-                                "https://tenniscoachbookingsystem:5173"
+                                "https://tenniscoachbookingapp:5173"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
