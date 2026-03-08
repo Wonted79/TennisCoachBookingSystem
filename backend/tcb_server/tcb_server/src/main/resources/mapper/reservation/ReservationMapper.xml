@@ -5,22 +5,14 @@
 <mapper namespace="com.tcb_server.auth.mapper.ReservationMapper">
 
     <insert id="save" parameterType="com.tcb_server.auth.domain.Reservation" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO reservation (admin_id, reservation_date, reservation_time, name, phone,
-                                 apply_date, register_date, change_date, amount, repayment_date, status)
-        VALUES (#{adminId}, #{reservationDate}, #{reservationTime}, #{name}, #{phone},
-                #{applyDate}, #{registerDate}, #{changeDate}, #{amount}, #{repaymentDate}, #{status})
+        INSERT INTO reservation (admin_id, reservation_at, content, status)
+        VALUES (#{adminId}, #{reservationAt}, #{content}, #{status})
     </insert>
 
     <update id="update" parameterType="com.tcb_server.auth.domain.Reservation">
         UPDATE reservation
-        SET name = #{name},
-            phone = #{phone},
-            apply_date = #{applyDate},
-            register_date = #{registerDate},
-            change_date = #{changeDate},
-            amount = #{amount},
-            repayment_date = #{repaymentDate},
-            status = #{status}
+        SET content = #{content},
+            status  = #{status}
         WHERE id = #{id}
     </update>
 
@@ -29,39 +21,31 @@
     </delete>
 
     <select id="findById" resultType="com.tcb_server.auth.domain.Reservation">
-        SELECT id, admin_id, reservation_date, reservation_time, name, phone,
-               apply_date, register_date, change_date, amount, repayment_date,
-               status, created_at, updated_at
+        SELECT id, admin_id, reservation_at, content, status, created_at, updated_at
         FROM reservation
         WHERE id = #{id}
     </select>
 
     <select id="findByAdminId" resultType="com.tcb_server.auth.domain.Reservation">
-        SELECT id, admin_id, reservation_date, reservation_time, name, phone,
-               apply_date, register_date, change_date, amount, repayment_date,
-               status, created_at, updated_at
+        SELECT id, admin_id, reservation_at, content, status, created_at, updated_at
         FROM reservation
         WHERE admin_id = #{adminId}
-        ORDER BY reservation_date, reservation_time
+        ORDER BY reservation_at
     </select>
 
     <select id="findByAdminIdAndDateRange" resultType="com.tcb_server.auth.domain.Reservation">
-        SELECT id, admin_id, reservation_date, reservation_time, name, phone,
-               apply_date, register_date, change_date, amount, repayment_date,
-               status, created_at, updated_at
+        SELECT id, admin_id, reservation_at, content, status, created_at, updated_at
         FROM reservation
         WHERE admin_id = #{adminId}
-          AND reservation_date BETWEEN #{startDate} AND #{endDate}
-        ORDER BY reservation_date, reservation_time
+          AND DATE(reservation_at) BETWEEN #{startDate} AND #{endDate}
+        ORDER BY reservation_at
     </select>
 
     <select id="findByDateRange" resultType="com.tcb_server.auth.domain.Reservation">
-        SELECT id, admin_id, reservation_date, reservation_time, name, phone,
-               apply_date, register_date, change_date, amount, repayment_date,
-               status, created_at, updated_at
+        SELECT id, admin_id, reservation_at, content, status, created_at, updated_at
         FROM reservation
-        WHERE reservation_date BETWEEN #{startDate} AND #{endDate}
-        ORDER BY reservation_date, reservation_time
+        WHERE DATE(reservation_at) BETWEEN #{startDate} AND #{endDate}
+        ORDER BY reservation_at
     </select>
 
 </mapper>

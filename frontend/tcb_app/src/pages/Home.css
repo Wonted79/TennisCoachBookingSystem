@@ -224,12 +224,27 @@
   border-radius: 2px;
 }
 
+.credentials-sections {
+  display: flex;
+  gap: 24px;
+}
+
+.credentials-section {
+  flex: 1;
+  min-width: 0;
+}
+
+.credentials-section-title {
+  color: #2e7d32;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0 0 8px 0;
+}
+
 .credentials-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  columns: 2;
-  column-gap: 30px;
 }
 
 .credentials-list li {
@@ -237,19 +252,6 @@
   font-size: 0.85rem;
   margin-bottom: 6px;
   line-height: 1.4;
-  break-inside: avoid;
-}
-
-.credentials-list li.credentials-section-title {
-  color: #2e7d32;
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin-top: 10px;
-  margin-bottom: 8px;
-}
-
-.credentials-list li.credentials-section-title:first-child {
-  margin-top: 0;
 }
 
 /* Card Bottom - Introduction */
@@ -411,8 +413,9 @@
     margin: 10px auto 15px;
   }
 
-  .credentials-list {
-    columns: 1;
+  .credentials-sections {
+    flex-direction: column;
+    gap: 16px;
   }
 
   .coach-name {

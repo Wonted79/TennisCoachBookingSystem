@@ -21,20 +21,12 @@ public class ReservationService {
     public Reservation save(ReservationRequest request) {
         Reservation reservation = new Reservation();
         reservation.setAdminId(request.getAdminId());
-        reservation.setReservationDate(request.getReservationDate());
-        reservation.setReservationTime(request.getReservationTime());
-        reservation.setName(request.getName());
-        reservation.setPhone(request.getPhone());
-        reservation.setApplyDate(request.getApplyDate());
-        reservation.setRegisterDate(request.getRegisterDate());
-        reservation.setChangeDate(request.getChangeDate());
-        reservation.setAmount(request.getAmount());
-        reservation.setRepaymentDate(request.getRepaymentDate());
+        reservation.setReservationAt(request.getReservationAt());
+        reservation.setContent(request.getContent());
         reservation.setStatus(request.getStatus() != null ? request.getStatus() : "BOOKED");
 
-        log.info("Saving reservation: name={}, date={}, time={}, adminId={}",
-                reservation.getName(), reservation.getReservationDate(),
-                reservation.getReservationTime(), reservation.getAdminId());
+        log.info("Saving reservation: reservationAt={}, adminId={}",
+                reservation.getReservationAt(), reservation.getAdminId());
 
         reservationMapper.save(reservation);
 
@@ -46,13 +38,7 @@ public class ReservationService {
     public Reservation update(Long id, ReservationRequest request) {
         Reservation reservation = reservationMapper.findById(id);
         if (reservation == null) return null;
-        reservation.setName(request.getName());
-        reservation.setPhone(request.getPhone());
-        reservation.setApplyDate(request.getApplyDate());
-        reservation.setRegisterDate(request.getRegisterDate());
-        reservation.setChangeDate(request.getChangeDate());
-        reservation.setAmount(request.getAmount());
-        reservation.setRepaymentDate(request.getRepaymentDate());
+        reservation.setContent(request.getContent());
         reservation.setStatus(request.getStatus());
         reservationMapper.update(reservation);
         return reservation;

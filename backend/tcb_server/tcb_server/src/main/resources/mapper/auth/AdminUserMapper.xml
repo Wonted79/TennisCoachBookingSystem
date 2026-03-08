@@ -6,7 +6,7 @@
 
     <select id="findByLoginId" resultType="com.tcb_server.auth.domain.AdminUser">
         SELECT id, login_id, password, name
-        FROM admin
+        FROM admin_user
         WHERE login_id = #{loginId}
     </select>
 

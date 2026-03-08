@@ -18,11 +18,11 @@ AuthService {
 
     public LoginResponse login(LoginRequest request) {
         AdminUser user = adminUserMapper.findByLoginId(request.getLoginId());
-        log.info("login user id: {}", user.getLoginId());
-        log.info("login user password: {}", user.getPassword());
         if (user == null) {
             return null;
         }
+        log.info("login user id: {}", user.getLoginId());
+        log.info("login user password: {}", user.getPassword());
 
         if (!user.getPassword().equals(request.getPassword())) {
             return null;

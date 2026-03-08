@@ -89,16 +89,24 @@ function Home() {
                 {coachInfo.name} <span className="coach-title">{coachInfo.title}</span>
               </h3>
               <div className="credentials-divider"></div>
-              <ul className="credentials-list">
-                <li className="credentials-section-title">학력</li>
-                {coachInfo.education.map((edu, index) => (
-                  <li key={`edu-${index}`}>{edu}</li>
-                ))}
-                <li className="credentials-section-title">수상 경력</li>
-                {coachInfo.achievements.map((achievement, index) => (
-                  <li key={`achievement-${index}`}>{achievement}</li>
-                ))}
-              </ul>
+              <div className="credentials-sections">
+                <div className="credentials-section">
+                  <h4 className="credentials-section-title">학력</h4>
+                  <ul className="credentials-list">
+                    {coachInfo.education.map((edu, index) => (
+                      <li key={`edu-${index}`}>{edu}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="credentials-section">
+                  <h4 className="credentials-section-title">수상 경력</h4>
+                  <ul className="credentials-list">
+                    {coachInfo.achievements.map((achievement, index) => (
+                      <li key={`achievement-${index}`}>{achievement}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
           <div className="card-bottom">

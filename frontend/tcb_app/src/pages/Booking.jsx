@@ -61,6 +61,8 @@ function Booking() {
     return `${year}-${month}-${day}`;
   };
 
+  const COACH_ADMIN_ID = 3;
+
   // 주간 예약 데이터 로드
   const loadWeekReservations = useCallback(async () => {
     const startDate = formatDate(weekStartDate);
@@ -70,17 +72,18 @@ function Booking() {
 
     try {
       const res = await fetch(
-        `/api/reservation/public/week?startDate=${startDate}&endDate=${endDateStr}`
+        `/api/reservation/week?adminId=${COACH_ADMIN_ID}&startDate=${startDate}&endDate=${endDateStr}`
       );
       if (res.ok) {
         const data = await res.json();
-        // { 'YYYY-MM-DD': { 'HH:mm': 'BOOKED' | 'HELD' } } 형태로 변환
+        // reservationAt: "YYYY-MM-DDTHH:mm:ss" → { dateKey: { timeKey: status } }
         const mapped = {};
         data.forEach((r) => {
-          if (!mapped[r.reservationDate]) {
-            mapped[r.reservationDate] = {};
-          }
-          mapped[r.reservationDate][r.reservationTime] =
+          const dt = r.reservationAt;
+          const dateKey = dt.slice(0, 10);
+          const timeKey = dt.slice(11, 16);
+          if (!mapped[dateKey]) mapped[dateKey] = {};
+          mapped[dateKey][timeKey] =
             r.status === 'HELD' ? BOOKING_STATUS.HELD : BOOKING_STATUS.BOOKED;
         });
         setBookings(mapped);
@@ -146,7 +149,7 @@ function Booking() {
         <div className="announcement-row inquiry-row">
           <Phone size={16} />
           <span className="inquiry-text">
-            레슨 문의: 010-1234-5678
+            레슨 문의: 010-5448-7723
           </span>
         </div>
       </div>

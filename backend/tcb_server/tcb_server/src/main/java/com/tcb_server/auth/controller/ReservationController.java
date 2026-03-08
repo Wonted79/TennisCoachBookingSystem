@@ -25,8 +25,7 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody ReservationRequest request) {
         try {
-            log.info("POST /api/reservation - name={}, date={}, time={}",
-                    request.getName(), request.getReservationDate(), request.getReservationTime());
+            log.info("POST /api/reservation - reservationAt={}", request.getReservationAt());
             Reservation reservation = reservationService.save(request);
             return ResponseEntity.ok(ReservationResponse.from(reservation));
         } catch (Exception e) {
@@ -70,8 +69,7 @@ public class ReservationController {
             List<java.util.Map<String, Object>> publicData = reservations.stream()
                     .map(r -> {
                         java.util.Map<String, Object> map = new java.util.HashMap<>();
-                        map.put("reservationDate", r.getReservationDate());
-                        map.put("reservationTime", r.getReservationTime());
+                        map.put("reservationAt", r.getReservationAt());
                         map.put("status", r.getStatus());
                         return map;
                     })
@@ -93,7 +91,6 @@ public class ReservationController {
             List<ReservationResponse> responses = reservations.stream()
                     .map(ReservationResponse::from)
                     .collect(Collectors.toList());
-            log.info("reservation = {}",reservations.get(0).getName());
             return ResponseEntity.ok(responses);
         } catch (Exception e) {
             log.error("예약 조회 실패: ", e);
