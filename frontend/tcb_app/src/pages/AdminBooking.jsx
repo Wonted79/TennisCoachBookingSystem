@@ -73,7 +73,7 @@ function AdminBooking() {
 
     try {
       const res = await fetch(
-        `/api/reservation/week?adminId=${user.id}&startDate=${startDate}&endDate=${endDateStr}`
+        `${import.meta.env.VITE_API_URL}/api/reservation/week?adminId=${user.id}&startDate=${startDate}&endDate=${endDateStr}`
       );
       if (res.ok) {
         const data = await res.json();
@@ -151,13 +151,13 @@ function AdminBooking() {
     try {
       let res;
       if (modalData.id) {
-        res = await fetch(`/api/reservation/${modalData.id}`, {
+        res = await fetch(`${import.meta.env.VITE_API_URL}/api/reservation/${modalData.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
         });
       } else {
-        res = await fetch('/api/reservation', {
+        res = await fetch(`${import.meta.env.VITE_API_URL}/api/reservation`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
@@ -181,7 +181,7 @@ function AdminBooking() {
     if (!window.confirm('이 예약을 삭제하시겠습니까?')) return;
 
     try {
-      const res = await fetch(`/api/reservation/${modalData.id}`, { method: 'DELETE' });
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/reservation/${modalData.id}`, { method: 'DELETE' });
       if (res.ok) {
         setModalOpen(false);
         loadWeekReservations();

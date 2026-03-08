@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="907299e6-10eb-4eee-af3d-55e403ec98dd" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/java/com/tcb_server/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/context/AuthContext.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/context/AuthContext.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/AdminBooking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/AdminBooking.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/Booking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/tcb_app/src/pages/Booking.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +135,7 @@
       <workItem from="1771211788449" duration="4560000" />
       <workItem from="1771463713701" duration="3407000" />
       <workItem from="1771831928114" duration="4448000" />
-      <workItem from="1772938766794" duration="20196000" />
+      <workItem from="1772938766794" duration="21160000" />
     </task>
     <servers />
   </component>

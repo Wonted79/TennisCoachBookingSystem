@@ -72,7 +72,7 @@ function Booking() {
 
     try {
       const res = await fetch(
-        `/api/reservation/week?adminId=${COACH_ADMIN_ID}&startDate=${startDate}&endDate=${endDateStr}`
+        `${import.meta.env.VITE_API_URL}/api/reservation/week?adminId=${COACH_ADMIN_ID}&startDate=${startDate}&endDate=${endDateStr}`
       );
       if (res.ok) {
         const data = await res.json();
