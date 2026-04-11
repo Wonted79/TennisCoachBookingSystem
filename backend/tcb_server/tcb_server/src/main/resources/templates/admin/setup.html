@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>코치 프로필 설정 - 테니스예약 서비스</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background-color: #e8e8e8;
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background-color: white;
+      border-radius: 12px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+    .title-area {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .title-area .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #37474f;
+      margin-bottom: 8px;
+    }
+    .title-area h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 6px;
+    }
+    .title-area p {
+      font-size: 0.84rem;
+      color: #777;
+      line-height: 1.5;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 6px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.93rem;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .form-group input:focus {
+      border-color: #37474f;
+      box-shadow: 0 0 0 2px rgba(55,71,79,0.1);
+    }
+    .hint {
+      font-size: 0.76rem;
+      color: #999;
+      margin-top: 4px;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 13px 0;
+      background-color: #37474f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background-color 0.2s;
+    }
+    .submit-btn:hover { background-color: #263238; }
+    .logout-link {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.82rem;
+      color: #999;
+      text-decoration: none;
+    }
+    .logout-link:hover { color: #555; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title-area">
+      <div class="logo">Tennis</div>
+      <h2>코치 프로필 설정</h2>
+      <p th:text="${adminName} + '님, 환영합니다!<br>먼저 코치 프로필을 등록해주세요.'" th:utext="'안녕하세요, <b>' + ${adminName} + '</b>님!<br>관리 페이지 이용을 위해 코치 프로필을 등록해주세요.'"></p>
+    </div>
+
+    <form method="post" action="/coach/setup">
+      <div class="form-group">
+        <label for="name">코치 이름</label>
+        <input type="text" id="name" name="name" placeholder="실명 입력" required>
+      </div>
+      <div class="form-group">
+        <label for="title">직함</label>
+        <input type="text" id="title" name="title" placeholder="예) 프로">
+        <div class="hint">등록 후 코치 정보 페이지에서 학력, 수상경력 등을 추가할 수 있습니다.</div>
+      </div>
+      <button type="submit" class="submit-btn">프로필 등록하기</button>
+    </form>
+
+    <form method="post" action="/admin/logout" style="margin:0; display:inline;">
+      <button type="submit" class="logout-link" style="background:none;border:none;cursor:pointer;width:100%;">로그아웃</button>
+    </form>
+  </div>
+</body>
+</html>

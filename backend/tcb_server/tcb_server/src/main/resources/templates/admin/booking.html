@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>예약 관리 - 잠원 123테니스</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background-color: #e0e0e0;
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* Header */
+    .booking-header {
+      background-color: #37474f;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .booking-header h1 {
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 600;
+      flex: 1;
+    }
+    .admin-badge {
+      background-color: #ff7043;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .admin-name {
+      color: #cfd8dc;
+      font-size: 0.9rem;
+    }
+    .logout-form { margin: 0; }
+    .logout-btn {
+      background-color: transparent;
+      border: 1px solid #78909c;
+      color: #cfd8dc;
+      padding: 7px 14px;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .logout-btn:hover {
+      background-color: #546e7a;
+      border-color: #90a4ae;
+    }
+
+    /* Legend */
+    .booking-legend {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      padding: 14px 20px;
+      background-color: #fafafa;
+      border-bottom: 1px solid #ddd;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .legend-color {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    .legend-color.available { background-color: white; }
+    .legend-color.booked { background-color: #ef5350; border-color: #ef5350; }
+    .legend-color.held { background-color: #ffa726; border-color: #ffa726; }
+    .legend-instruction {
+      margin-left: auto;
+      color: #888;
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+
+    .day-date { display: none; }
+
+    /* Table */
+    .booking-table-wrapper {
+      padding: 20px;
+      overflow-x: auto;
+    }
+    .booking-table {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .booking-table th, .booking-table td {
+      border: 1px solid #e0e0e0;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .time-header {
+      background-color: #4a4a4a;
+      color: white;
+      padding: 15px 10px;
+      font-weight: 600;
+      width: 80px;
+      min-width: 80px;
+    }
+    .day-header {
+      background-color: #4a4a4a;
+      color: white;
+      padding: 10px 5px;
+      font-weight: 500;
+      min-width: 100px;
+    }
+    .day-name { font-size: 1rem; font-weight: 600; }
+    .day-date { font-size: 0.8rem; color: #bbb; margin-top: 2px; }
+    .time-cell {
+      background-color: #f5f5f5;
+      color: #555;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 8px;
+    }
+    .booking-cell {
+      padding: 10px 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.75rem;
+      font-weight: 500;
+      height: 40px;
+      position: relative;
+    }
+    .booking-cell.available { background-color: white; }
+    .booking-cell.available:hover { background-color: #e3f2fd; }
+    .booking-cell.booked { background-color: #ef5350; color: white; }
+    .booking-cell.booked:hover { background-color: #e53935; }
+    .booking-cell.held { background-color: #ffa726; color: white; }
+    .booking-cell.held:hover { background-color: #fb8c00; }
+    .cell-name {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: white;
+      display: block;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-overlay.hidden { display: none; }
+    .modal-content {
+      background-color: white;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 440px;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid #eee;
+    }
+    .modal-header h2 { font-size: 1.1rem; font-weight: 700; color: #333; }
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #999;
+      padding: 4px 8px;
+    }
+    .modal-close:hover { color: #333; }
+    .modal-info {
+      padding: 10px 24px;
+      background-color: #f5f5f5;
+      font-size: 0.9rem;
+      color: #555;
+      font-weight: 500;
+    }
+    .modal-form {
+      padding: 16px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-group label { font-size: 0.82rem; font-weight: 600; color: #555; }
+    .form-group textarea {
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      outline: none;
+      resize: vertical;
+      font-family: inherit;
+      line-height: 1.5;
+      transition: border-color 0.2s;
+    }
+    .form-group textarea:focus {
+      border-color: #42a5f5;
+      box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.15);
+    }
+    .status-toggle { display: flex; gap: 8px; }
+    .toggle-btn {
+      flex: 1;
+      padding: 10px 0;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: #f5f5f5;
+      color: #999;
+    }
+    .toggle-booked.active { background-color: #ef5350; border-color: #ef5350; color: white; }
+    .toggle-held.active { background-color: #ffa726; border-color: #ffa726; color: white; }
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      padding: 16px 24px 20px;
+      border-top: 1px solid #eee;
+    }
+    .btn-save {
+      flex: 1;
+      padding: 11px 0;
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .btn-save:hover { background-color: #1b5e20; }
+    .btn-delete {
+      padding: 11px 20px;
+      background-color: #ef5350;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .btn-delete:hover { background-color: #c62828; }
+    .btn-cancel {
+      padding: 11px 20px;
+      background-color: #e0e0e0;
+      color: #555;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .btn-cancel:hover { background-color: #bdbdbd; }
+
+    @media (max-width: 768px) {
+      .admin-badge { display: none; }
+      .legend-instruction { width: 100%; text-align: center; margin-left: 0; margin-top: 6px; }
+      .booking-table-wrapper { padding: 10px; }
+      .day-header { min-width: 60px; }
+      .time-header { width: 60px; min-width: 60px; }
+      .modal-content { width: 95%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="booking-header">
+    <h1 th:text="${coach?.name} + ' 예약 관리'">예약 관리</h1>
+    <span class="admin-name" th:text="${adminName} + '님'"></span>
+    <span class="admin-badge">관리자 모드</span>
+    <a th:href="@{/admin/coach/{id}(id=${coachId})}" class="logout-btn" style="text-decoration:none; padding: 7px 14px;">정보 편집</a>
+    <a href="/admin/main" class="logout-btn" style="text-decoration:none; padding: 7px 14px;">← 목록</a>
+    <form class="logout-form" method="post" action="/admin/logout">
+      <button type="submit" class="logout-btn">로그아웃</button>
+    </form>
+  </header>
+
+  <div class="booking-legend">
+    <div class="legend-item">
+      <span class="legend-color available"></span>
+      <span>예약 가능</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-color booked"></span>
+      <span>예약 완료</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-color held"></span>
+      <span>임시 예약</span>
+    </div>
+    <div class="legend-instruction">셀을 클릭하여 예약 정보를 입력하세요</div>
+  </div>
+
+  <div class="booking-table-wrapper">
+    <table class="booking-table" id="bookingTable">
+      <thead id="tableHead"></thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">새 예약 등록</h2>
+        <button class="modal-close" id="modalCloseBtn">✕</button>
+      </div>
+      <div class="modal-info" id="modalTimeInfo"></div>
+      <div class="modal-form">
+        <div class="form-group">
+          <label>예약 상태</label>
+          <div class="status-toggle">
+            <button type="button" class="toggle-btn toggle-booked active" id="toggleBooked">예약 완료</button>
+            <button type="button" class="toggle-btn toggle-held" id="toggleHeld">임시 예약</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contentInput">내용 (이름, 메모 등)</label>
+          <textarea id="contentInput" rows="4" placeholder="예약자 이름, 연락처 등 메모를 자유롭게 입력하세요"></textarea>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-save" id="saveBtn">저장</button>
+        <button class="btn-delete hidden" id="deleteBtn">삭제</button>
+        <button class="btn-cancel" id="cancelBtn">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    const COACH_ID = /*[[${coachId}]]*/ null;
+    /*]]>*/
+
+    const DAY_KEYS = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+    const DAY_NAMES = { MON: '월', TUE: '화', WED: '수', THU: '목', FRI: '금', SAT: '토', SUN: '일' };
+    const TIME_SLOTS = [];
+    for (let h = 6; h <= 21; h++) {
+      TIME_SLOTS.push(String(h).padStart(2, '0') + ':00');
+      if (h < 21) TIME_SLOTS.push(String(h).padStart(2, '0') + ':30');
+    }
+
+    let reservations = {};
+    let modalState = { id: null, dayOfWeek: '', time: '', content: '', status: 'BOOKED' };
+
+    async function loadReservations() {
+      try {
+        const res = await fetch(`/api/reservation?coachId=${COACH_ID}`);
+        if (res.ok) {
+          const data = await res.json();
+          reservations = {};
+          data.forEach(r => {
+            if (!reservations[r.dayOfWeek]) reservations[r.dayOfWeek] = {};
+            reservations[r.dayOfWeek][r.time] = r;
+          });
+          renderTable();
+        }
+      } catch (err) {
+        console.error('예약 데이터 로드 실패:', err);
+      }
+    }
+
+    function getCellPreview(reservation) {
+      if (!reservation || !reservation.content) return '';
+      return reservation.content.split('\n')[0].slice(0, 10);
+    }
+
+    function renderTable() {
+      // Header
+      const thead = document.getElementById('tableHead');
+      let headerRow = '<tr><th class="time-header">시간</th>';
+      DAY_KEYS.forEach(key => {
+        headerRow += `<th class="day-header"><div class="day-name">${DAY_NAMES[key]}</div></th>`;
+      });
+      headerRow += '</tr>';
+      thead.innerHTML = headerRow;
+
+      // Body
+      const tbody = document.getElementById('tableBody');
+      let bodyHtml = '';
+      TIME_SLOTS.forEach(time => {
+        bodyHtml += `<tr><td class="time-cell">${time}</td>`;
+        DAY_KEYS.forEach(dayKey => {
+          const reservation = reservations[dayKey]?.[time];
+          const status = reservation ? (reservation.status === 'HELD' ? 'held' : 'booked') : 'available';
+          const preview = getCellPreview(reservation);
+          const dataId = reservation ? reservation.id : '';
+          const content = reservation ? (reservation.content || '') : '';
+          const resStatus = reservation ? reservation.status : 'BOOKED';
+          bodyHtml += `<td class="booking-cell ${status}"
+            data-id="${dataId}"
+            data-day-of-week="${dayKey}"
+            data-time="${time}"
+            data-content="${content.replace(/"/g, '&quot;').replace(/\n/g, '&#10;')}"
+            data-status="${resStatus}"
+            onclick="handleCellClick(this)">`;
+          if (reservation) {
+            bodyHtml += `<span class="cell-name">${preview}</span>`;
+          }
+          bodyHtml += '</td>';
+        });
+        bodyHtml += '</tr>';
+      });
+      tbody.innerHTML = bodyHtml;
+    }
+
+    function handleCellClick(cell) {
+      const id = cell.dataset.id ? parseInt(cell.dataset.id) : null;
+      const dayOfWeek = cell.dataset.dayOfWeek;
+      const time = cell.dataset.time;
+      const content = cell.dataset.content.replace(/&#10;/g, '\n');
+      const status = cell.dataset.status || 'BOOKED';
+      openModal(id, dayOfWeek, time, content, status);
+    }
+
+    function openModal(id, dayOfWeek, time, content, status) {
+      modalState = { id, dayOfWeek, time, content, status };
+
+      document.getElementById('modalTitle').textContent = id ? '예약 수정' : '새 예약 등록';
+      document.getElementById('modalTimeInfo').textContent = `${DAY_NAMES[dayOfWeek]}요일 ${time}`;
+      document.getElementById('contentInput').value = content;
+      document.getElementById('saveBtn').textContent = id ? '수정' : '저장';
+
+      const deleteBtn = document.getElementById('deleteBtn');
+      if (id) {
+        deleteBtn.classList.remove('hidden');
+      } else {
+        deleteBtn.classList.add('hidden');
+      }
+
+      setStatus(status);
+      document.getElementById('modalOverlay').classList.remove('hidden');
+    }
+
+    function setStatus(status) {
+      modalState.status = status;
+      const bookedBtn = document.getElementById('toggleBooked');
+      const heldBtn = document.getElementById('toggleHeld');
+      if (status === 'BOOKED') {
+        bookedBtn.classList.add('active');
+        heldBtn.classList.remove('active');
+      } else {
+        bookedBtn.classList.remove('active');
+        heldBtn.classList.add('active');
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.add('hidden');
+    }
+
+    async function saveReservation() {
+      const content = document.getElementById('contentInput').value;
+      const body = {
+        coachId: COACH_ID,
+        dayOfWeek: modalState.dayOfWeek,
+        time: modalState.time,
+        content: content || null,
+        status: modalState.status,
+      };
+
+      try {
+        let res;
+        if (modalState.id) {
+          res = await fetch(`/api/reservation/${modalState.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          });
+        } else {
+          res = await fetch('/api/reservation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          });
+        }
+        if (res.ok) {
+          closeModal();
+          await loadReservations();
+        } else {
+          alert('저장에 실패했습니다.');
+        }
+      } catch (err) {
+        console.error('저장 실패:', err);
+        alert('서버 연결에 실패했습니다.');
+      }
+    }
+
+    async function deleteReservation() {
+      if (!modalState.id) return;
+      if (!confirm('이 예약을 삭제하시겠습니까?')) return;
+
+      try {
+        const res = await fetch(`/api/reservation/${modalState.id}`, { method: 'DELETE' });
+        if (res.ok) {
+          closeModal();
+          await loadReservations();
+        } else {
+          alert('삭제에 실패했습니다.');
+        }
+      } catch (err) {
+        console.error('삭제 실패:', err);
+        alert('서버 연결에 실패했습니다.');
+      }
+    }
+
+    document.getElementById('modalOverlay').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    });
+
+    document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+    document.getElementById('cancelBtn').addEventListener('click', closeModal);
+    document.getElementById('saveBtn').addEventListener('click', saveReservation);
+    document.getElementById('deleteBtn').addEventListener('click', deleteReservation);
+
+    document.getElementById('toggleBooked').addEventListener('click', () => setStatus('BOOKED'));
+    document.getElementById('toggleHeld').addEventListener('click', () => setStatus('HELD'));
+
+    loadReservations();
+  </script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.tcb_server.auth.service;
 
 import com.tcb_server.auth.domain.Reservation;
+import com.tcb_server.auth.domain.ReservationStatus;
 import com.tcb_server.auth.dto.ReservationRequest;
 import com.tcb_server.auth.mapper.ReservationMapper;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -20,13 +20,14 @@ public class ReservationService {
     @Transactional
     public Reservation save(ReservationRequest request) {
         Reservation reservation = new Reservation();
-        reservation.setAdminId(request.getAdminId());
-        reservation.setReservationAt(request.getReservationAt());
+        reservation.setCoachId(request.getCoachId());
+        reservation.setDayOfWeek(request.getDayOfWeek());
+        reservation.setTime(request.getTime());
         reservation.setContent(request.getContent());
-        reservation.setStatus(request.getStatus() != null ? request.getStatus() : "BOOKED");
+        reservation.setStatus(request.getStatus() != null ? request.getStatus() : ReservationStatus.BOOKED);
 
-        log.info("Saving reservation: reservationAt={}, adminId={}",
-                reservation.getReservationAt(), reservation.getAdminId());
+        log.info("Saving reservation: dayOfWeek={}, time={}, coachId={}",
+                reservation.getDayOfWeek(), reservation.getTime(), reservation.getCoachId());
 
         reservationMapper.save(reservation);
 
@@ -49,19 +50,11 @@ public class ReservationService {
         reservationMapper.delete(id);
     }
 
-    public Reservation findById(Long id) {
-        return reservationMapper.findById(id);
+    public List<Reservation> findByCoachId(Long coachId) {
+        return reservationMapper.findByCoachId(coachId);
     }
 
-    public List<Reservation> findByAdminId(Long adminId) {
-        return reservationMapper.findByAdminId(adminId);
-    }
-
-    public List<Reservation> findByAdminIdAndDateRange(Long adminId, LocalDate startDate, LocalDate endDate) {
-        return reservationMapper.findByAdminIdAndDateRange(adminId, startDate, endDate);
-    }
-
-    public List<Reservation> findByDateRange(LocalDate startDate, LocalDate endDate) {
-        return reservationMapper.findByDateRange(startDate, endDate);
+    public List<Reservation> findAll() {
+        return reservationMapper.findAll();
     }
 }

@@ -4,10 +4,25 @@
 
 <mapper namespace="com.tcb_server.auth.mapper.AdminUserMapper">
 
-    <select id="findByLoginId" resultType="com.tcb_server.auth.domain.AdminUser">
-        SELECT id, login_id, password, name
-        FROM admin_user
-        WHERE login_id = #{loginId}
+    <select id="findByUsername" resultType="com.tcb_server.auth.domain.AdminUser">
+        SELECT id, username, password_hash, role, is_temp_password
+        FROM users
+        WHERE username = #{username}
     </select>
+
+    <select id="existsByUsername" resultType="boolean">
+        SELECT COUNT(*) > 0 FROM users WHERE username = #{username}
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users (username, password_hash, role, is_temp_password)
+        VALUES (#{username}, #{passwordHash}, #{role}, #{isTempPassword})
+    </insert>
+
+    <update id="updatePassword">
+        UPDATE users SET password_hash = #{passwordHash}, is_temp_password = FALSE
+        WHERE id = #{id}
+    </update>
+
 
 </mapper>

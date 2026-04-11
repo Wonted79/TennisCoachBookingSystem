@@ -5,8 +5,8 @@
 <mapper namespace="com.tcb_server.auth.mapper.ReservationMapper">
 
     <insert id="save" parameterType="com.tcb_server.auth.domain.Reservation" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO reservation (admin_id, reservation_at, content, status)
-        VALUES (#{adminId}, #{reservationAt}, #{content}, #{status})
+        INSERT INTO reservation (coach_id, day_of_week, time, content, status)
+        VALUES (#{coachId}, #{dayOfWeek}, #{time}, #{content}, #{status})
     </insert>
 
     <update id="update" parameterType="com.tcb_server.auth.domain.Reservation">
@@ -21,31 +21,22 @@
     </delete>
 
     <select id="findById" resultType="com.tcb_server.auth.domain.Reservation">
-        SELECT id, admin_id, reservation_at, content, status, created_at, updated_at
+        SELECT id, coach_id, day_of_week, time, content, status, created_at, updated_at
         FROM reservation
         WHERE id = #{id}
     </select>
 
-    <select id="findByAdminId" resultType="com.tcb_server.auth.domain.Reservation">
-        SELECT id, admin_id, reservation_at, content, status, created_at, updated_at
+    <select id="findByCoachId" resultType="com.tcb_server.auth.domain.Reservation">
+        SELECT id, coach_id, day_of_week, time, content, status, created_at, updated_at
         FROM reservation
-        WHERE admin_id = #{adminId}
-        ORDER BY reservation_at
+        WHERE coach_id = #{coachId}
+        ORDER BY FIELD(day_of_week, 'MON','TUE','WED','THU','FRI','SAT','SUN'), time
     </select>
 
-    <select id="findByAdminIdAndDateRange" resultType="com.tcb_server.auth.domain.Reservation">
-        SELECT id, admin_id, reservation_at, content, status, created_at, updated_at
+    <select id="findAll" resultType="com.tcb_server.auth.domain.Reservation">
+        SELECT id, coach_id, day_of_week, time, content, status, created_at, updated_at
         FROM reservation
-        WHERE admin_id = #{adminId}
-          AND DATE(reservation_at) BETWEEN #{startDate} AND #{endDate}
-        ORDER BY reservation_at
-    </select>
-
-    <select id="findByDateRange" resultType="com.tcb_server.auth.domain.Reservation">
-        SELECT id, admin_id, reservation_at, content, status, created_at, updated_at
-        FROM reservation
-        WHERE DATE(reservation_at) BETWEEN #{startDate} AND #{endDate}
-        ORDER BY reservation_at
+        ORDER BY FIELD(day_of_week, 'MON','TUE','WED','THU','FRI','SAT','SUN'), time
     </select>
 
 </mapper>

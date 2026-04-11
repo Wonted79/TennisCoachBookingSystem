@@ -8,8 +8,9 @@ import lombok.Setter;
 public class AdminUser {
 
     private Long id;
-    private String loginId;
-    private String password;
-    private String name;
+    private String username;       // 로그인 ID (was loginId)
+    private String passwordHash;   // BCrypt 해시 (was password)
+    private String role;           // ADMIN or COACH
+    private Boolean isTempPassword;
 
 }

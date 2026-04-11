@@ -1,15 +1,16 @@
 package com.tcb_server.auth.dto;
 
+import com.tcb_server.auth.domain.BookingDay;
+import com.tcb_server.auth.domain.ReservationStatus;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class ReservationRequest {
-    private Long adminId;
-    private LocalDateTime reservationAt;
+    private Long coachId;
+    private BookingDay dayOfWeek;
+    private String time;
     private String content;
-    private String status;
+    private ReservationStatus status;
 }

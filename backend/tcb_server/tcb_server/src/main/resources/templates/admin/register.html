@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입 - Tennis Admin</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f0f2f4;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .brand-panel {
+      position: fixed;
+      top: 0; left: 0;
+      width: 380px;
+      height: 100vh;
+      background: #263238;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 44px;
+      z-index: 10;
+    }
+    .brand-panel .brand-logo {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .brand-panel .brand-sub {
+      font-size: 0.9rem;
+      color: #90a4ae;
+      line-height: 1.7;
+    }
+    .brand-panel .brand-divider {
+      width: 36px;
+      height: 3px;
+      background: #546e7a;
+      border-radius: 2px;
+      margin: 24px 0;
+    }
+    .brand-panel .brand-desc {
+      font-size: 0.82rem;
+      color: #607d8b;
+      line-height: 1.8;
+    }
+
+    .form-panel {
+      margin-left: 380px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 24px;
+    }
+    .form-box {
+      width: 100%;
+      max-width: 400px;
+    }
+    .form-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #263238;
+      margin-bottom: 6px;
+    }
+    .form-subtitle {
+      font-size: 0.85rem;
+      color: #90a4ae;
+      margin-bottom: 32px;
+    }
+
+    .msg {
+      border-radius: 8px;
+      font-size: 0.84rem;
+      padding: 11px 16px;
+      margin-bottom: 20px;
+    }
+    .msg-error  { background: #ffebee; border: 1px solid #ef9a9a; color: #c62828; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #546e7a;
+      margin-bottom: 7px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #cfd8dc;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: #263238;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus {
+      border-color: #37474f;
+      box-shadow: 0 0 0 3px rgba(55,71,79,0.08);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: #263238;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background 0.2s;
+    }
+    .submit-btn:hover { background: #37474f; }
+
+    .form-links {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .form-links a {
+      font-size: 0.82rem;
+      color: #78909c;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .form-links a:hover { color: #263238; }
+
+    @media (max-width: 720px) {
+      .brand-panel { display: none; }
+      .form-panel  { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+
+  <aside class="brand-panel">
+    <div class="brand-logo">Tennis</div>
+    <div class="brand-sub">코치예약 관리 시스템</div>
+    <div class="brand-divider"></div>
+    <div class="brand-desc">
+      예약 일정 관리, 코치 프로필 관리,<br>
+      공지사항을 한 곳에서 관리하세요.
+    </div>
+  </aside>
+
+  <main class="form-panel">
+    <div class="form-box">
+      <div class="form-title">회원가입</div>
+      <div class="form-subtitle">코치 계정을 생성합니다. 로그인 후 프로필을 등록하세요.</div>
+
+      <div th:if="${registerError}" class="msg msg-error" th:text="${registerError}"></div>
+
+      <form method="post" action="/admin/register">
+        <div class="form-group">
+          <label for="username">아이디</label>
+          <input type="text" id="username" name="username" placeholder="사용할 아이디 입력" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="password">비밀번호</label>
+          <input type="password" id="password" name="password" placeholder="비밀번호 입력" required autocomplete="new-password">
+        </div>
+        <button type="submit" class="submit-btn">회원가입</button>
+      </form>
+
+      <div class="form-links">
+        <a href="/admin/login">← 로그인으로 돌아가기</a>
+      </div>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>

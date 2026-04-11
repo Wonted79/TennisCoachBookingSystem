@@ -7,5 +7,11 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface AdminUserMapper {
 
-    AdminUser findByLoginId(@Param("loginId") String loginId);
+    AdminUser findByUsername(@Param("username") String username);
+
+    boolean existsByUsername(@Param("username") String username);
+
+    void save(AdminUser adminUser);
+
+    void updatePassword(@Param("id") Long id, @Param("passwordHash") String passwordHash);
 }

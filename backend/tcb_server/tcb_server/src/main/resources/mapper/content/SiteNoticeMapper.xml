@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tcb_server.content.mapper.SiteNoticeMapper">
+
+    <select id="findByCoachId" parameterType="long" resultType="com.tcb_server.content.domain.SiteNotice">
+        SELECT id, coach_id, content FROM site_notice WHERE coach_id = #{coachId}
+    </select>
+
+    <!-- coach_id UNIQUE 제약으로 1:1 보장, 중복 시 content 갱신 -->
+    <insert id="upsert" parameterType="com.tcb_server.content.domain.SiteNotice">
+        INSERT INTO site_notice (coach_id, content)
+        VALUES (#{coachId}, #{content})
+        ON DUPLICATE KEY UPDATE content = #{content}
+    </insert>
+
+</mapper>

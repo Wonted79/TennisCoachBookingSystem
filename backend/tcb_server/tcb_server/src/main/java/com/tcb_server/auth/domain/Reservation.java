@@ -11,10 +11,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Reservation {
     private Long id;
-    private Long adminId;
-    private LocalDateTime reservationAt;
+    private Long coachId;
+    private BookingDay dayOfWeek;
+    private String time;
     private String content;
-    private String status;
+    private ReservationStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

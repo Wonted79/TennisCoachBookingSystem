@@ -6,11 +6,10 @@ import com.tcb_server.auth.dto.ReservationResponse;
 import com.tcb_server.auth.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.DateTimeFormat;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,9 +22,12 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody ReservationRequest request) {
+    public ResponseEntity<?> create(@RequestBody ReservationRequest request, HttpSession session) {
+        if (session == null || session.getAttribute("adminId") == null) {
+            return ResponseEntity.status(401).body("인증이 필요합니다.");
+        }
         try {
-            log.info("POST /api/reservation - reservationAt={}", request.getReservationAt());
+            log.info("POST /api/reservation - dayOfWeek={}, time={}", request.getDayOfWeek(), request.getTime());
             Reservation reservation = reservationService.save(request);
             return ResponseEntity.ok(ReservationResponse.from(reservation));
         } catch (Exception e) {
@@ -35,7 +37,10 @@ public class ReservationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ReservationRequest request) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ReservationRequest request, HttpSession session) {
+        if (session == null || session.getAttribute("adminId") == null) {
+            return ResponseEntity.status(401).body("인증이 필요합니다.");
+        }
         try {
             Reservation reservation = reservationService.update(id, request);
             if (reservation == null) {
@@ -49,7 +54,10 @@ public class ReservationController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id, HttpSession session) {
+        if (session == null || session.getAttribute("adminId") == null) {
+            return ResponseEntity.status(401).body("인증이 필요합니다.");
+        }
         try {
             reservationService.delete(id);
             return ResponseEntity.ok().build();
@@ -59,17 +67,18 @@ public class ReservationController {
         }
     }
 
-    @GetMapping("/public/week")
-    public ResponseEntity<?> getPublicWeekReservations(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+    @GetMapping("/public")
+    public ResponseEntity<?> getPublicReservations(@RequestParam(required = false) Long coachId) {
         try {
-            List<Reservation> reservations = reservationService.findByDateRange(startDate, endDate);
-            // 일반 사용자에게는 상태와 날짜/시간만 반환 (개인정보 제외)
+            List<Reservation> reservations = coachId != null
+                    ? reservationService.findByCoachId(coachId)
+                    : reservationService.findAll();
             List<java.util.Map<String, Object>> publicData = reservations.stream()
                     .map(r -> {
                         java.util.Map<String, Object> map = new java.util.HashMap<>();
-                        map.put("reservationAt", r.getReservationAt());
+                        map.put("coachId", r.getCoachId());
+                        map.put("dayOfWeek", r.getDayOfWeek());
+                        map.put("time", r.getTime());
                         map.put("status", r.getStatus());
                         return map;
                     })
@@ -81,13 +90,10 @@ public class ReservationController {
         }
     }
 
-    @GetMapping("/week")
-    public ResponseEntity<?> getWeekReservations(
-            @RequestParam Long adminId,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+    @GetMapping
+    public ResponseEntity<?> getReservations(@RequestParam Long coachId) {
         try {
-            List<Reservation> reservations = reservationService.findByAdminIdAndDateRange(adminId, startDate, endDate);
+            List<Reservation> reservations = reservationService.findByCoachId(coachId);
             List<ReservationResponse> responses = reservations.stream()
                     .map(ReservationResponse::from)
                     .collect(Collectors.toList());

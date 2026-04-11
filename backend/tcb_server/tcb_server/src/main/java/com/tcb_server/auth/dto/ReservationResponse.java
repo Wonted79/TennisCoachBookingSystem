@@ -1,25 +1,27 @@
 package com.tcb_server.auth.dto;
 
+import com.tcb_server.auth.domain.BookingDay;
 import com.tcb_server.auth.domain.Reservation;
+import com.tcb_server.auth.domain.ReservationStatus;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Builder
 public class ReservationResponse {
     private Long id;
-    private Long adminId;
-    private LocalDateTime reservationAt;
+    private Long coachId;
+    private BookingDay dayOfWeek;
+    private String time;
     private String content;
-    private String status;
+    private ReservationStatus status;
 
     public static ReservationResponse from(Reservation reservation) {
         return ReservationResponse.builder()
                 .id(reservation.getId())
-                .adminId(reservation.getAdminId())
-                .reservationAt(reservation.getReservationAt())
+                .coachId(reservation.getCoachId())
+                .dayOfWeek(reservation.getDayOfWeek())
+                .time(reservation.getTime())
                 .content(reservation.getContent())
                 .status(reservation.getStatus())
                 .build();

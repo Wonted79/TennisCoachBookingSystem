@@ -27,11 +27,14 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	//mybatis
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
 	//maria_DB
 	implementation 'org.mariadb.jdbc:mariadb-java-client'
+	//BCrypt (Spring Security crypto only - no full security config needed)
+	implementation 'org.springframework.security:spring-security-crypto'
 	//lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
