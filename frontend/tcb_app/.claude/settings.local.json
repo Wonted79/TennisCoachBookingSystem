@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(echo:*)",
+      "Bash(cd:*)",
+      "Bash(npx vite:*)",
+      "Bash(xargs grep:*)"
+    ]
+  }
+}

@@ -72,36 +72,6 @@
   color: #555;
 }
 
-/* Navigation Buttons */
-.booking-nav-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  padding: 16px 20px;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #ddd;
-}
-
-.booking-nav-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: white;
-  color: #2e7d32;
-  border: 2px solid #2e7d32;
-  padding: 10px 24px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.booking-nav-button:hover {
-  background-color: #2e7d32;
-  color: white;
-}
-
 /* Legend */
 .booking-legend {
   display: flex;
@@ -139,39 +109,6 @@
 .legend-color.held {
   background-color: #ffa726;
   border-color: #ffa726;
-}
-
-/* Week Navigation */
-.week-navigation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  background-color: #f5f5f5;
-}
-
-.nav-button {
-  background-color: #2e7d32;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 0.9rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.nav-button:hover {
-  background-color: #1b5e20;
-}
-
-.week-range {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #333;
-  min-width: 180px;
-  text-align: center;
 }
 
 /* Booking Table */
@@ -221,12 +158,6 @@
   font-weight: 600;
 }
 
-.day-date {
-  font-size: 0.8rem;
-  color: #bbb;
-  margin-top: 2px;
-}
-
 /* Time Cell */
 .time-cell {
   background-color: #f5f5f5;
@@ -240,7 +171,7 @@
 .booking-cell {
   padding: 12px 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
   font-size: 0.75rem;
   font-weight: 500;
   height: 40px;
@@ -254,11 +185,6 @@
 
 .booking-cell.available:hover {
   background-color: #42a5f5;
-  color: white;
-}
-
-.booking-cell.available:hover::after {
-  content: '예약';
 }
 
 /* Booked - 빨간색 (예약 완료) */
@@ -297,16 +223,6 @@
     font-size: 0.8rem;
   }
 
-  .booking-nav-buttons {
-    gap: 12px;
-    padding: 14px 16px;
-  }
-
-  .booking-nav-button {
-    padding: 9px 18px;
-    font-size: 0.88rem;
-  }
-
   .booking-legend {
     flex-wrap: wrap;
     gap: 15px;
@@ -322,15 +238,6 @@
     height: 20px;
   }
 
-  .week-navigation {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .nav-button {
-    padding: 10px 30px;
-  }
-
   .booking-table-wrapper {
     padding: 10px;
   }
@@ -342,10 +249,6 @@
 
   .day-name {
     font-size: 0.9rem;
-  }
-
-  .day-date {
-    font-size: 0.7rem;
   }
 
   .time-header {
@@ -381,17 +284,6 @@
     font-size: 0.78rem;
   }
 
-  .booking-nav-buttons {
-    gap: 10px;
-    padding: 12px;
-  }
-
-  .booking-nav-button {
-    padding: 8px 14px;
-    font-size: 0.82rem;
-    gap: 6px;
-  }
-
   .booking-header {
     padding: 12px 15px;
     gap: 15px;
@@ -412,10 +304,6 @@
 
   .day-name {
     font-size: 0.8rem;
-  }
-
-  .day-date {
-    font-size: 0.65rem;
   }
 
   .time-header,
