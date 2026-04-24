@@ -1,138 +1,36 @@
-import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import './Home.css';
-
-/* 카드 인덱스별 색상 변형 - HTML 파일과 동일 */
-const CARD_VARIANTS = [
-  { headerBg: 'linear-gradient(145deg,var(--g50) 0%,var(--y50) 100%)', ringColor: 'var(--g500)', ringGlow: 'rgba(82,183,136,.15)', initialColor: 'var(--g700)' },
-  { headerBg: 'linear-gradient(145deg,var(--y50) 0%,var(--g50) 100%)', ringColor: 'var(--y400)', ringGlow: 'rgba(200,217,106,.15)', initialColor: 'var(--y400)' },
-  { headerBg: 'linear-gradient(145deg,var(--n50) 0%,var(--g50) 100%)',  ringColor: 'var(--g300)', ringGlow: 'rgba(149,213,178,.15)', initialColor: 'var(--g500)' },
-  { headerBg: 'linear-gradient(145deg,#f7f7f7 0%,var(--g50) 100%)',    ringColor: 'var(--n300)', ringGlow: 'rgba(176,176,176,.12)', initialColor: 'var(--n300)' },
-];
-
-function CoachCard({ coach, onBooking, index }) {
-  const hasEdu  = coach.education?.length > 0;
-  const hasCert = coach.certifications?.length > 0;
-  const [activeTab, setActiveTab] = useState(hasEdu ? 'edu' : 'cert');
-
-  const v       = CARD_VARIANTS[index % CARD_VARIANTS.length];
-  const initial = coach.name?.charAt(0) ?? '?';
-
-  return (
-    <div className="coach-card">
-      {/* ── HEADER ── */}
-      <div className="coach-card-header" style={{ background: v.headerBg }}>
-        {coach.title && <span className="coach-badge">{coach.title}</span>}
-        <div
-          className="coach-photo-ring"
-          style={{ borderColor: v.ringColor, boxShadow: `0 0 0 6px ${v.ringGlow}` }}
-        >
-          {coach.profileImageUrl
-            ? <img className="coach-photo-img" src={`${import.meta.env.VITE_API_URL}${coach.profileImageUrl}`} alt={coach.name} />
-            : <span className="coach-initial" style={{ color: v.initialColor }}>{initial}</span>
-          }
-        </div>
-        <div className="coach-header-info">
-          <div className="coach-name">{coach.name}</div>
-          <div className="coach-role">{coach.title}</div>
-        </div>
-      </div>
-
-      {/* ── BODY ── */}
-      <div className="coach-card-body">
-        {coach.introduction && <p className="coach-bio">{coach.introduction}</p>}
-
-        {(hasEdu || hasCert) && (
-          <>
-            <div className="coach-tabs">
-              {hasEdu && (
-                <button
-                  className={`tab-btn${activeTab === 'edu' ? ' active' : ''}`}
-                  onClick={() => setActiveTab('edu')}
-                >
-                  경력/학력
-                </button>
-              )}
-              {hasCert && (
-                <button
-                  className={`tab-btn${activeTab === 'cert' ? ' active' : ''}`}
-                  onClick={() => setActiveTab('cert')}
-                >
-                  자격증
-                </button>
-              )}
-            </div>
-
-            {hasEdu && (
-              <div className={`tab-panel${activeTab === 'edu' ? ' active' : ''}`}>
-                <ul className="cred-list">
-                  {coach.education.map((edu, i) => <li key={i}>{edu}</li>)}
-                </ul>
-              </div>
-            )}
-
-            {hasCert && (
-              <div className={`tab-panel${activeTab === 'cert' ? ' active' : ''}`}>
-                <ul className="cred-list">
-                  {coach.certifications.map((cert, i) => <li key={i}>{cert}</li>)}
-                </ul>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-
-      {/* ── FOOTER ── */}
-      <div className="coach-card-footer">
-        <div className="coach-footer-top">
-          <div className="sns-row">
-            <a href="#" className="sns-btn instagram" aria-label="Instagram">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-            <a href="#" className="sns-btn youtube" aria-label="YouTube">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-            </a>
-            <a href="#" className="sns-btn" aria-label="Blog">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <button className="book-btn" onClick={() => onBooking(coach.id)}>
-          예약 현황 확인하기
-        </button>
-      </div>
-    </div>
-  );
-}
 
 function Home() {
   const navigate = useNavigate();
-  const [coaches, setCoaches] = useState([]);
-  const trackRef = useRef(null);
+  const [searchParams] = useSearchParams();
+  const coachId = searchParams.get('coachId');
+
+  const [coach, setCoach] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('edu');
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/public/coaches`)
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .then((data) => { if (Array.isArray(data)) setCoaches(data); })
-      .catch((err) => console.error('코치 목록 로드 실패:', err));
-  }, []);
+      .then((data) => {
+        if (!Array.isArray(data) || data.length === 0) { setLoading(false); return; }
+        const found = coachId ? data.find((c) => String(c.id) === String(coachId)) : data[0];
+        const target = found ?? data[0];
+        setCoach(target);
+        setActiveTab(target.education?.length > 0 ? 'edu' : 'cert');
+        setLoading(false);
+      })
+      .catch((err) => { console.error('코치 정보 로드 실패:', err); setLoading(false); });
+  }, [coachId]);
 
-  const handleBooking = (coachId) => {
-    navigate(`/booking?coachId=${coachId}`);
+  const handleBooking = () => {
+    if (coach) navigate(`/booking?coachId=${coach.id}`);
   };
 
-  const scrollCoaches = (dir) => {
-    if (trackRef.current) {
-      trackRef.current.scrollBy({ left: dir * 360, behavior: 'smooth' });
-    }
-  };
+  const hasEdu  = coach?.education?.length > 0;
+  const hasCert = coach?.certifications?.length > 0;
 
   return (
     <div className="home-wrap">
@@ -145,15 +43,23 @@ function Home() {
           </a>
           <ul>
             <li><a href="#programs">프로그램</a></li>
-            <li><a href="#coaches">코치진</a></li>
             <li><a href="#rules">레슨 규정</a></li>
-            <li><a href="#coaches" className="nav-cta">예약하기</a></li>
+            <li>
+              <a
+                href="#home"
+                className="nav-cta"
+                onClick={(e) => { e.preventDefault(); handleBooking(); }}
+              >
+                예약하기
+              </a>
+            </li>
           </ul>
         </div>
       </nav>
 
       {/* HERO */}
       <section className="hero" id="home">
+        {/* LEFT */}
         <div className="hero-left">
           <div className="hero-eyebrow">123 Tennis Club · 이촌</div>
           <h1>
@@ -161,63 +67,110 @@ function Home() {
             LIKE A<em>CHAMPION.</em>
           </h1>
           <p className="hero-desc">
-            전문 코치진과 함께 당신의 테니스를 완성하세요.<br />
+            전문 코치와 함께 당신의 테니스를 완성하세요.<br />
             실력에 맞춘 맞춤형 레슨, 체계적인 커리큘럼.
           </p>
           <div className="hero-btns">
-            <a href="#coaches" className="btn-primary">코치 예약하기</a>
+            <button className="btn-primary" onClick={handleBooking}>예약 현황 확인하기</button>
             <a href="#programs" className="btn-outline">프로그램 보기</a>
           </div>
         </div>
 
+        {/* RIGHT — Coach Profile */}
         <div className="hero-right">
-          <div className="hero-court-bg"></div>
-          <div className="court-svg-wrap">
+          {/* decorative background elements */}
+          <div className="hcp-bg-gradient"></div>
+          <div className="hcp-court-lines">
             <svg viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="40" y="40" width="420" height="520" stroke="#2d6a4f" strokeWidth="4"/>
-              <line x1="40" y1="300" x2="460" y2="300" stroke="#2d6a4f" strokeWidth="4"/>
-              <line x1="250" y1="40" x2="250" y2="560" stroke="#2d6a4f" strokeWidth="3"/>
-              <rect x="100" y="40" width="300" height="180" stroke="#2d6a4f" strokeWidth="2.5"/>
-              <rect x="100" y="380" width="300" height="180" stroke="#2d6a4f" strokeWidth="2.5"/>
-              <circle cx="250" cy="300" r="7" fill="#2d6a4f"/>
+              <rect x="40" y="40" width="420" height="520" stroke="white" strokeWidth="3"/>
+              <line x1="40" y1="300" x2="460" y2="300" stroke="white" strokeWidth="3"/>
+              <line x1="250" y1="40" x2="250" y2="560" stroke="white" strokeWidth="2"/>
+              <rect x="100" y="40" width="300" height="180" stroke="white" strokeWidth="2"/>
+              <rect x="100" y="380" width="300" height="180" stroke="white" strokeWidth="2"/>
+              <circle cx="250" cy="300" r="7" fill="white"/>
             </svg>
           </div>
-          <div className="hero-blob"></div>
-          <div className="hero-ball"></div>
-        </div>
-      </section>
+          <div className="hcp-orb hcp-orb-1"></div>
+          <div className="hcp-orb hcp-orb-2"></div>
 
-      {/* COACHES */}
-      <section id="coaches">
-        <div className="container">
-          <div className="coaches-header">
-            <div>
-              <div className="sec-eyebrow">Our Coaches</div>
-              <h2 className="sec-title">전문 코치진</h2>
-              <p className="sec-sub">각 분야 최고의 전문가들이 여러분의 테니스를 책임집니다.</p>
+          {loading && (
+            <div className="hcp-loading">
+              <div className="hcp-spinner"></div>
             </div>
-            <div className="scroll-arrows">
-              <button className="arrow-btn" onClick={() => scrollCoaches(-1)} aria-label="이전">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <polyline points="15 18 9 12 15 6"/>
-                </svg>
-              </button>
-              <button className="arrow-btn" onClick={() => scrollCoaches(1)} aria-label="다음">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <polyline points="9 18 15 12 9 6"/>
-                </svg>
-              </button>
-            </div>
-          </div>
+          )}
 
-          <div className="coaches-track" ref={trackRef}>
-            {coaches.map((coach, i) => (
-              <CoachCard key={coach.id} coach={coach} onBooking={handleBooking} index={i} />
-            ))}
-            {coaches.length === 0 && (
-              <p className="no-coaches">코치 정보를 불러오는 중입니다...</p>
-            )}
-          </div>
+          {!loading && !coach && (
+            <div className="hcp-empty">코치 정보를 불러올 수 없습니다.</div>
+          )}
+
+          {!loading && coach && (
+            <div className="hcp-card">
+              {/* photo */}
+              <div className="hcp-photo-wrap">
+                <div className="hcp-photo-ring">
+                  {coach.profileImageUrl
+                    ? <img
+                        className="hcp-photo-img"
+                        src={`${import.meta.env.VITE_API_URL}${coach.profileImageUrl}`}
+                        alt={coach.name}
+                      />
+                    : <span className="hcp-initial">{coach.name?.charAt(0) ?? '?'}</span>
+                  }
+                </div>
+                {coach.title && <span className="hcp-title-badge">{coach.title}</span>}
+              </div>
+
+              {/* name & org */}
+              <div className="hcp-identity">
+                <h2 className="hcp-name">{coach.name} 코치</h2>
+                <p className="hcp-org">123 Tennis Club · 이촌</p>
+              </div>
+
+              {/* bio */}
+              {coach.introduction && (
+                <p className="hcp-bio">"{coach.introduction}"</p>
+              )}
+
+              {/* credentials */}
+              {(hasEdu || hasCert) && (
+                <div className="hcp-creds">
+                  {hasEdu && hasCert && (
+                    <div className="hcp-tabs">
+                      <button
+                        className={`hcp-tab${activeTab === 'edu' ? ' active' : ''}`}
+                        onClick={() => setActiveTab('edu')}
+                      >경력 / 학력</button>
+                      <button
+                        className={`hcp-tab${activeTab === 'cert' ? ' active' : ''}`}
+                        onClick={() => setActiveTab('cert')}
+                      >자격증</button>
+                    </div>
+                  )}
+                  {hasEdu && (
+                    <ul className={`hcp-cred-list${activeTab === 'edu' || !hasCert ? '' : ' hcp-hidden'}`}>
+                      {coach.education.map((edu, i) => <li key={i}>{edu}</li>)}
+                    </ul>
+                  )}
+                  {hasCert && (
+                    <ul className={`hcp-cred-list${activeTab === 'cert' || !hasEdu ? '' : ' hcp-hidden'}`}>
+                      {coach.certifications.map((cert, i) => <li key={i}>{cert}</li>)}
+                    </ul>
+                  )}
+                </div>
+              )}
+
+              {/* CTA */}
+              <button className="hcp-book-btn" onClick={handleBooking}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                예약 현황 확인하기
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -365,7 +318,6 @@ function Home() {
           </div>
           <ul className="footer-links">
             <li><a href="#programs">프로그램</a></li>
-            <li><a href="#coaches">코치진</a></li>
             <li><a href="#rules">레슨 규정</a></li>
           </ul>
         </div>
