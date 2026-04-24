@@ -2,7 +2,6 @@ package com.tcb_server.admin;
 
 import com.tcb_server.auth.dto.LoginRequest;
 import com.tcb_server.auth.dto.LoginResponse;
-import com.tcb_server.auth.dto.RegisterRequest;
 import com.tcb_server.auth.service.AuthService;
 import com.tcb_server.content.service.ContentService;
 import com.tcb_server.content.service.FileUploadService;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Map;
+
 @Controller
 @RequiredArgsConstructor
 public class AdminWebController {
@@ -22,10 +23,13 @@ public class AdminWebController {
     private final ContentService contentService;
     private final FileUploadService fileUploadService;
 
-    // ── 로그인 / 회원가입 / 비밀번호 변경 ─────────────
+    // ── 로그인 ──────────────────────────────────────────
 
     @GetMapping("/admin/login")
-    public String loginPage() {
+    public String loginPage(@RequestParam(required = false) String pwChanged, Model model) {
+        if ("1".equals(pwChanged)) {
+            model.addAttribute("pwSuccess", "비밀번호가 변경되었습니다. 새 비밀번호로 로그인해주세요.");
+        }
         return "admin/login";
     }
 
@@ -51,6 +55,11 @@ public class AdminWebController {
         session.setAttribute("adminRole", response.getRole());
         session.setAttribute("adminCoachId", response.getCoachProfileId());
 
+        if (Boolean.TRUE.equals(response.getIsTempPassword())) {
+            redirectAttributes.addFlashAttribute("pwInfo", "임시 비밀번호로 로그인하셨습니다. 비밀번호를 변경해주세요.");
+            return "redirect:/admin/change-password";
+        }
+
         return "ADMIN".equals(response.getRole()) ? "redirect:/admin" : "redirect:/coach";
     }
 
@@ -60,58 +69,73 @@ public class AdminWebController {
         return "redirect:/admin/login";
     }
 
-    @GetMapping("/admin/register")
-    public String registerPage() {
-        return "admin/register";
-    }
-
-    @PostMapping("/admin/register")
-    public String register(
-            @RequestParam String username,
-            @RequestParam String password,
-            RedirectAttributes redirectAttributes) {
-
-        RegisterRequest request = new RegisterRequest();
-        request.setUsername(username);
-        request.setPassword(password);
-
-        String error = authService.register(request);
-        if (error != null) {
-            redirectAttributes.addFlashAttribute("registerError", error);
-            return "redirect:/admin/register";
-        }
-        redirectAttributes.addFlashAttribute("registerSuccess", "회원가입이 완료되었습니다. 로그인해주세요.");
-        return "redirect:/admin/login";
-    }
+    // ── 비밀번호 변경 (이메일 인증 3단계) ─────────────────
 
     @GetMapping("/admin/change-password")
     public String changePasswordPage() {
         return "admin/change-password";
     }
 
-    @PostMapping("/admin/change-password")
-    public String changePassword(
+    @PostMapping("/admin/change-password/send-code")
+    @ResponseBody
+    public Map<String, Object> sendCode(
             @RequestParam String username,
-            @RequestParam String currentPassword,
-            @RequestParam String newPassword,
-            RedirectAttributes redirectAttributes) {
-
-        String error = authService.changePassword(username, currentPassword, newPassword);
+            @RequestParam String email) {
+        String error = authService.sendPasswordResetCode(username, email);
         if (error != null) {
-            redirectAttributes.addFlashAttribute("pwError", error);
-            return "redirect:/admin/change-password";
+            return Map.of("success", false, "message", error);
         }
-        redirectAttributes.addFlashAttribute("pwSuccess", "비밀번호가 변경되었습니다.");
-        return "redirect:/admin/login";
+        return Map.of("success", true);
     }
 
-    // ── ADMIN 메인 (코치 목록) ─────────────────────────
+    @PostMapping("/admin/change-password/verify-code")
+    @ResponseBody
+    public Map<String, Object> verifyCode(
+            @RequestParam String email,
+            @RequestParam String code) {
+        String error = authService.verifyPasswordResetCode(email, code);
+        if (error != null) {
+            return Map.of("success", false, "message", error);
+        }
+        return Map.of("success", true);
+    }
+
+    @PostMapping("/admin/change-password/reset")
+    @ResponseBody
+    public Map<String, Object> resetPassword(
+            @RequestParam String email,
+            @RequestParam String newPassword) {
+        String error = authService.resetPasswordByEmail(email, newPassword);
+        if (error != null) {
+            return Map.of("success", false, "message", error);
+        }
+        return Map.of("success", true);
+    }
+
+    // ── ADMIN 메인 (코치 목록 + 계정 생성) ────────────────
 
     @GetMapping("/admin")
     public String mainPage(HttpSession session, Model model) {
         model.addAttribute("adminName", session.getAttribute("adminName"));
+        model.addAttribute("adminRole", session.getAttribute("adminRole"));
         model.addAttribute("coaches", contentService.getAllCoaches());
         return "admin/main";
+    }
+
+    @PostMapping("/admin/create-coach")
+    public String createCoach(
+            @RequestParam String username,
+            @RequestParam String email,
+            RedirectAttributes redirectAttributes) {
+
+        String result = authService.createCoachAccount(username, email);
+        if (result == null) {
+            redirectAttributes.addFlashAttribute("createSuccess",
+                    "코치 계정이 생성되었습니다. 임시 비밀번호를 이메일(" + email + ")로 발송했습니다.");
+        } else {
+            redirectAttributes.addFlashAttribute("createError", result);
+        }
+        return "redirect:/admin";
     }
 
     // ── 코치 편집 (ADMIN) ─────────────────────────────
@@ -126,7 +150,6 @@ public class AdminWebController {
         model.addAttribute("noticeAction", "/admin/coach/" + id + "/notice");
         model.addAttribute("backUrl", "/admin");
 
-        // 전역 예외 핸들러가 세션에 저장한 에러 메시지 처리
         Object infoError = session.getAttribute("infoError");
         if (infoError != null) {
             model.addAttribute("infoError", infoError);

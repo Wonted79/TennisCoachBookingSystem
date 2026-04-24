@@ -7,17 +7,14 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 public class AdminInterceptor implements HandlerInterceptor {
 
-    // 세션/role 체크 없이 통과
-    private static final String[] AUTH_PATHS = {
-            "/admin/login", "/admin/register", "/admin/change-password", "/admin/logout"
-    };
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uri = request.getRequestURI();
 
-        for (String path : AUTH_PATHS) {
-            if (uri.equals(path)) return true;
+        // 인증 없이 접근 가능한 경로
+        if (uri.equals("/admin/login") || uri.equals("/admin/logout") ||
+                uri.startsWith("/admin/change-password")) {
+            return true;
         }
 
         HttpSession session = request.getSession(false);

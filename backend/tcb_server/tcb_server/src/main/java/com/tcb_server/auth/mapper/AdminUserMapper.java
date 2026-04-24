@@ -9,7 +9,11 @@ public interface AdminUserMapper {
 
     AdminUser findByUsername(@Param("username") String username);
 
+    AdminUser findByEmail(@Param("email") String email);
+
     boolean existsByUsername(@Param("username") String username);
+
+    boolean existsByEmail(@Param("email") String email);
 
     void save(AdminUser adminUser);
 

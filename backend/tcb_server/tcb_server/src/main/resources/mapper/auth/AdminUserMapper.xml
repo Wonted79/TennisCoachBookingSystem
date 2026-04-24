@@ -5,24 +5,33 @@
 <mapper namespace="com.tcb_server.auth.mapper.AdminUserMapper">
 
     <select id="findByUsername" resultType="com.tcb_server.auth.domain.AdminUser">
-        SELECT id, username, password_hash, role, is_temp_password
+        SELECT id, username, email, password_hash, role, is_temp_password
         FROM users
         WHERE username = #{username}
+    </select>
+
+    <select id="findByEmail" resultType="com.tcb_server.auth.domain.AdminUser">
+        SELECT id, username, email, password_hash, role, is_temp_password
+        FROM users
+        WHERE email = #{email}
     </select>
 
     <select id="existsByUsername" resultType="boolean">
         SELECT COUNT(*) > 0 FROM users WHERE username = #{username}
     </select>
 
+    <select id="existsByEmail" resultType="boolean">
+        SELECT COUNT(*) > 0 FROM users WHERE email = #{email}
+    </select>
+
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO users (username, password_hash, role, is_temp_password)
-        VALUES (#{username}, #{passwordHash}, #{role}, #{isTempPassword})
+        INSERT INTO users (username, email, password_hash, role, is_temp_password)
+        VALUES (#{username}, #{email}, #{passwordHash}, #{role}, #{isTempPassword})
     </insert>
 
     <update id="updatePassword">
         UPDATE users SET password_hash = #{passwordHash}, is_temp_password = FALSE
         WHERE id = #{id}
     </update>
-
 
 </mapper>

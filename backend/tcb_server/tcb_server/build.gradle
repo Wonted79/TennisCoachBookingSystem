@@ -35,11 +35,13 @@ dependencies {
 	implementation 'org.mariadb.jdbc:mariadb-java-client'
 	//BCrypt (Spring Security crypto only - no full security config needed)
 	implementation 'org.springframework.security:spring-security-crypto'
+	//Mail
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	//lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	//test
-	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
