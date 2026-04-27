@@ -1,32 +1,43 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import './Home.css';
 
 function Home() {
   const navigate = useNavigate();
+  const { username } = useParams();
   const [searchParams] = useSearchParams();
   const coachId = searchParams.get('coachId');
 
   const [coach, setCoach] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('edu');
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/public/coaches`)
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .then((data) => {
-        if (!Array.isArray(data) || data.length === 0) { setLoading(false); return; }
-        const found = coachId ? data.find((c) => String(c.id) === String(coachId)) : data[0];
-        const target = found ?? data[0];
-        setCoach(target);
-        setActiveTab(target.education?.length > 0 ? 'edu' : 'cert');
-        setLoading(false);
-      })
-      .catch((err) => { console.error('코치 정보 로드 실패:', err); setLoading(false); });
-  }, [coachId]);
+    if (username) {
+      fetch(`${import.meta.env.VITE_API_URL}/api/public/coaches/${username}`)
+        .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+        .then((data) => {
+          setCoach(data);
+          setLoading(false);
+        })
+        .catch((err) => { console.error('코치 정보 로드 실패:', err); setLoading(false); });
+    } else {
+      fetch(`${import.meta.env.VITE_API_URL}/api/public/coaches`)
+        .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+        .then((data) => {
+          if (!Array.isArray(data) || data.length === 0) { setLoading(false); return; }
+          const found = coachId ? data.find((c) => String(c.id) === String(coachId)) : data[0];
+          const target = found ?? data[0];
+          setCoach(target);
+          setLoading(false);
+        })
+        .catch((err) => { console.error('코치 정보 로드 실패:', err); setLoading(false); });
+    }
+  }, [username, coachId]);
 
   const handleBooking = () => {
-    if (coach) navigate(`/booking?coachId=${coach.id}`);
+    if (!coach) return;
+    if (coach.username) navigate(`/${coach.username}/booking`);
+    else navigate(`/booking?coachId=${coach.id}`);
   };
 
   const hasEdu  = coach?.education?.length > 0;
@@ -59,53 +70,25 @@ function Home() {
 
       {/* HERO */}
       <section className="hero" id="home">
-        {/* LEFT */}
-        <div className="hero-left">
-          <div className="hero-eyebrow">123 Tennis Club · 이촌</div>
-          <h1>
-            PLAY<br />
-            LIKE A<em>CHAMPION.</em>
-          </h1>
-          <p className="hero-desc">
-            전문 코치와 함께 당신의 테니스를 완성하세요.<br />
-            실력에 맞춘 맞춤형 레슨, 체계적인 커리큘럼.
-          </p>
-          <div className="hero-btns">
-            <button className="btn-primary" onClick={handleBooking}>예약 현황 확인하기</button>
-            <a href="#programs" className="btn-outline">프로그램 보기</a>
+        <div className="hcp-bg-gradient"></div>
+        <div className="hcp-orb hcp-orb-1"></div>
+        <div className="hcp-orb hcp-orb-2"></div>
+
+        {loading && (
+          <div className="hcp-loading">
+            <div className="hcp-spinner"></div>
           </div>
-        </div>
+        )}
 
-        {/* RIGHT — Coach Profile */}
-        <div className="hero-right">
-          {/* decorative background elements */}
-          <div className="hcp-bg-gradient"></div>
-          <div className="hcp-court-lines">
-            <svg viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="40" y="40" width="420" height="520" stroke="white" strokeWidth="3"/>
-              <line x1="40" y1="300" x2="460" y2="300" stroke="white" strokeWidth="3"/>
-              <line x1="250" y1="40" x2="250" y2="560" stroke="white" strokeWidth="2"/>
-              <rect x="100" y="40" width="300" height="180" stroke="white" strokeWidth="2"/>
-              <rect x="100" y="380" width="300" height="180" stroke="white" strokeWidth="2"/>
-              <circle cx="250" cy="300" r="7" fill="white"/>
-            </svg>
-          </div>
-          <div className="hcp-orb hcp-orb-1"></div>
-          <div className="hcp-orb hcp-orb-2"></div>
+        {!loading && !coach && (
+          <div className="hcp-empty">코치 정보를 불러올 수 없습니다.</div>
+        )}
 
-          {loading && (
-            <div className="hcp-loading">
-              <div className="hcp-spinner"></div>
-            </div>
-          )}
+        {!loading && coach && (
+          <div className="hcp-card">
 
-          {!loading && !coach && (
-            <div className="hcp-empty">코치 정보를 불러올 수 없습니다.</div>
-          )}
-
-          {!loading && coach && (
-            <div className="hcp-card">
-              {/* photo */}
+            {/* top row: photo + identity + bio */}
+            <div className="hcp-top">
               <div className="hcp-photo-wrap">
                 <div className="hcp-photo-ring">
                   {coach.profileImageUrl
@@ -120,58 +103,50 @@ function Home() {
                 {coach.title && <span className="hcp-title-badge">{coach.title}</span>}
               </div>
 
-              {/* name & org */}
               <div className="hcp-identity">
-                <h2 className="hcp-name">{coach.name} 코치</h2>
                 <p className="hcp-org">123 Tennis Club · 이촌</p>
+                <h2 className="hcp-name">{coach.name} 코치</h2>
+                {coach.introduction && (
+                  <p className="hcp-bio">"{coach.introduction}"</p>
+                )}
               </div>
+            </div>
 
-              {/* bio */}
-              {coach.introduction && (
-                <p className="hcp-bio">"{coach.introduction}"</p>
-              )}
-
-              {/* credentials */}
-              {(hasEdu || hasCert) && (
-                <div className="hcp-creds">
-                  {hasEdu && hasCert && (
-                    <div className="hcp-tabs">
-                      <button
-                        className={`hcp-tab${activeTab === 'edu' ? ' active' : ''}`}
-                        onClick={() => setActiveTab('edu')}
-                      >경력 / 학력</button>
-                      <button
-                        className={`hcp-tab${activeTab === 'cert' ? ' active' : ''}`}
-                        onClick={() => setActiveTab('cert')}
-                      >자격증</button>
-                    </div>
-                  )}
-                  {hasEdu && (
-                    <ul className={`hcp-cred-list${activeTab === 'edu' || !hasCert ? '' : ' hcp-hidden'}`}>
+            {/* credentials: two columns */}
+            {(hasEdu || hasCert) && (
+              <div className="hcp-creds">
+                {hasEdu && (
+                  <div className="hcp-cred-group">
+                    <div className="hcp-cred-label">경력 / 학력</div>
+                    <ul className="hcp-cred-list">
                       {coach.education.map((edu, i) => <li key={i}>{edu}</li>)}
                     </ul>
-                  )}
-                  {hasCert && (
-                    <ul className={`hcp-cred-list${activeTab === 'cert' || !hasEdu ? '' : ' hcp-hidden'}`}>
+                  </div>
+                )}
+                {hasCert && (
+                  <div className="hcp-cred-group">
+                    <div className="hcp-cred-label">자격증</div>
+                    <ul className="hcp-cred-list">
                       {coach.certifications.map((cert, i) => <li key={i}>{cert}</li>)}
                     </ul>
-                  )}
-                </div>
-              )}
+                  </div>
+                )}
+              </div>
+            )}
 
-              {/* CTA */}
-              <button className="hcp-book-btn" onClick={handleBooking}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="4" width="18" height="18" rx="2"/>
-                  <line x1="16" y1="2" x2="16" y2="6"/>
-                  <line x1="8" y1="2" x2="8" y2="6"/>
-                  <line x1="3" y1="10" x2="21" y2="10"/>
-                </svg>
-                예약 현황 확인하기
-              </button>
-            </div>
-          )}
-        </div>
+            {/* CTA */}
+            <button className="hcp-book-btn" onClick={handleBooking}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              예약 현황 확인하기
+            </button>
+
+          </div>
+        )}
       </section>
 
       {/* PROGRAMS */}

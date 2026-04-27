@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Megaphone, Phone } from 'lucide-react';
 import './Booking.css';
 
@@ -14,9 +14,11 @@ const DAYS_KO = ['월', '화', '수', '목', '금', '토', '일'];
 
 function Booking() {
   const navigate = useNavigate();
+  const { username } = useParams();
   const [searchParams] = useSearchParams();
   const coachId = searchParams.get('coachId');
 
+  const [coachProfileId, setCoachProfileId] = useState(coachId);
   const [bookings, setBookings] = useState({});
   const [noticeText, setNoticeText] = useState('');
   const [coachName, setCoachName] = useState('');
@@ -32,32 +34,48 @@ function Booking() {
     return slots;
   }, []);
 
-  // 코치 정보 로드
+  // username 라우트면 먼저 coachId 조회
   useEffect(() => {
-    if (!coachId) return;
-    fetch(`${import.meta.env.VITE_API_URL}/api/public/coach?coachId=${coachId}`)
+    if (!username) {
+      setCoachProfileId(coachId);
+      return;
+    }
+    fetch(`${import.meta.env.VITE_API_URL}/api/public/coaches/${username}`)
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then((data) => {
+        if (data?.name) setCoachName(data.name);
+        if (data?.phone) setCoachPhone(data.phone);
+        if (data?.id) setCoachProfileId(String(data.id));
+      })
+      .catch((err) => console.error('코치 정보 로드 실패:', err));
+  }, [username, coachId]);
+
+  // 코치 정보 로드 (coachId 방식)
+  useEffect(() => {
+    if (username || !coachProfileId) return;
+    fetch(`${import.meta.env.VITE_API_URL}/api/public/coach?coachId=${coachProfileId}`)
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
       .then((data) => {
         if (data?.name) setCoachName(data.name);
         if (data?.phone) setCoachPhone(data.phone);
       })
       .catch((err) => console.error('코치 정보 로드 실패:', err));
-  }, [coachId]);
+  }, [username, coachProfileId]);
 
   // 공지사항 로드
   useEffect(() => {
-    if (!coachId) return;
-    fetch(`${import.meta.env.VITE_API_URL}/api/public/notice?coachId=${coachId}`)
+    if (!coachProfileId) return;
+    fetch(`${import.meta.env.VITE_API_URL}/api/public/notice?coachId=${coachProfileId}`)
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
       .then((data) => { if (data?.content) setNoticeText(data.content); })
       .catch((err) => console.error('공지사항 로드 실패:', err));
-  }, [coachId]);
+  }, [coachProfileId]);
 
   // 예약 데이터 로드
   useEffect(() => {
-    if (!coachId) return;
+    if (!coachProfileId) return;
     let cancelled = false;
-    fetch(`${import.meta.env.VITE_API_URL}/api/reservation/public?coachId=${coachId}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/reservation/public?coachId=${coachProfileId}`)
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
       .then((data) => {
         if (cancelled) return;
@@ -71,7 +89,7 @@ function Booking() {
       })
       .catch((err) => console.error('예약 데이터 로드 실패:', err));
     return () => { cancelled = true; };
-  }, [coachId]);
+  }, [coachProfileId]);
 
   const getBookingStatus = (dayIndex, time) => {
     const dayKey = DAY_KEYS[dayIndex];
@@ -81,7 +99,7 @@ function Booking() {
   return (
     <div className="booking">
       <header className="booking-header">
-        <button className="back-button" onClick={() => navigate('/')}>
+        <button className="back-button" onClick={() => navigate(username ? `/${username}` : '/')}>
           ← 뒤로
         </button>
         <h1>{coachName ? `${coachName} 코치 레슨 예약` : '레슨 예약'}</h1>
