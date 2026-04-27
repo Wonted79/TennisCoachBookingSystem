@@ -15,10 +15,10 @@ SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE IF NOT EXISTS users (
     id               BIGINT       AUTO_INCREMENT PRIMARY KEY,
     username         VARCHAR(50)  UNIQUE NOT NULL,
-    email            VARCHAR(255) UNIQUE NOT NULL,
+    email            VARCHAR(255) NULL,
     password_hash    VARCHAR(255) NOT NULL,
     role             ENUM('ADMIN', 'COACH') NOT NULL,
-    is_temp_password BOOLEAN      NOT NULL DEFAULT TRUE,
+    is_temp_password BOOLEAN      NOT NULL DEFAULT FALSE,
     created_at       DATETIME     DEFAULT CURRENT_TIMESTAMP,
     updated_at       DATETIME     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

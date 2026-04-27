@@ -31,6 +31,10 @@ public class ContentService {
         return coachInfoMapper.findByUserId(userId);
     }
 
+    public CoachInfo getCoachByUsername(String username) {
+        return coachInfoMapper.findByUsername(username);
+    }
+
     /** COACH 계정의 프로필 최초 생성 */
     @Transactional
     public CoachInfo createCoachProfile(Long userId, String name, String phone) {

@@ -3,22 +3,31 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tcb_server.content.mapper.CoachInfoMapper">
 
+    <sql id="baseSelect">
+        SELECT cp.id, cp.user_id, u.username, cp.name, cp.phone, cp.profile_image_url, cp.introduction,
+               cp.education, cp.awards, cp.certifications, cp.updated_at
+        FROM coach_profile cp
+        JOIN users u ON cp.user_id = u.id
+    </sql>
+
     <select id="findById" parameterType="long" resultType="com.tcb_server.content.domain.CoachInfo">
-        SELECT id, user_id, name, phone, profile_image_url, introduction,
-               education, awards, certifications, updated_at
-        FROM coach_profile WHERE id = #{id}
+        <include refid="baseSelect"/>
+        WHERE cp.id = #{id}
     </select>
 
     <select id="findByUserId" parameterType="long" resultType="com.tcb_server.content.domain.CoachInfo">
-        SELECT id, user_id, name, phone, profile_image_url, introduction,
-               education, awards, certifications, updated_at
-        FROM coach_profile WHERE user_id = #{userId}
+        <include refid="baseSelect"/>
+        WHERE cp.user_id = #{userId}
+    </select>
+
+    <select id="findByUsername" parameterType="string" resultType="com.tcb_server.content.domain.CoachInfo">
+        <include refid="baseSelect"/>
+        WHERE u.username = #{username}
     </select>
 
     <select id="findAll" resultType="com.tcb_server.content.domain.CoachInfo">
-        SELECT id, user_id, name, phone, profile_image_url, introduction,
-               education, awards, certifications, updated_at
-        FROM coach_profile ORDER BY id
+        <include refid="baseSelect"/>
+        ORDER BY cp.id
     </select>
 
     <insert id="save" parameterType="com.tcb_server.content.domain.CoachInfo" useGeneratedKeys="true" keyProperty="id">

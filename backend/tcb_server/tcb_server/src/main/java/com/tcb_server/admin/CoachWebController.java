@@ -1,6 +1,5 @@
 package com.tcb_server.admin;
 
-import com.tcb_server.content.domain.CoachInfo;
 import com.tcb_server.content.service.ContentService;
 import com.tcb_server.content.service.FileUploadService;
 import jakarta.servlet.http.HttpSession;
@@ -23,55 +22,6 @@ public class CoachWebController {
 
     @GetMapping
     public String dashboard(HttpSession session) {
-        Long coachId = (Long) session.getAttribute("adminCoachId");
-        if (coachId == null) {
-            return "redirect:/coach/setup";
-        }
-        return "redirect:/coach/profile";
-    }
-
-    // ── 프로필 최초 설정 ───────────────────────────────
-
-    @GetMapping("/setup")
-    public String setupPage(HttpSession session, Model model) {
-        // 세션에 없어도 DB에 이미 프로필이 있으면 세션 복구 후 리다이렉트
-        if (session.getAttribute("adminCoachId") == null) {
-            Long adminId = (Long) session.getAttribute("adminId");
-            CoachInfo existing = contentService.getCoachByUserId(adminId);
-            if (existing != null) {
-                session.setAttribute("adminCoachId", existing.getId());
-                if (existing.getName() != null) session.setAttribute("adminName", existing.getName());
-                return "redirect:/coach/profile";
-            }
-        } else {
-            return "redirect:/coach/profile";
-        }
-        model.addAttribute("adminName", session.getAttribute("adminName"));
-        return "admin/setup";
-    }
-
-    @PostMapping("/setup")
-    public String setupSubmit(
-            @RequestParam String name,
-            @RequestParam(required = false) String phone,
-            HttpSession session,
-            RedirectAttributes redirectAttributes) {
-
-        Long adminId = (Long) session.getAttribute("adminId");
-
-        // 이미 프로필이 존재하면 생성하지 않고 세션만 갱신
-        CoachInfo existing = contentService.getCoachByUserId(adminId);
-        if (existing != null) {
-            session.setAttribute("adminCoachId", existing.getId());
-            session.setAttribute("adminName", existing.getName() != null ? existing.getName() : name);
-            return "redirect:/coach/profile";
-        }
-
-        CoachInfo created = contentService.createCoachProfile(adminId, name, phone);
-        session.setAttribute("adminCoachId", created.getId());
-        session.setAttribute("adminName", name);
-
-        redirectAttributes.addFlashAttribute("infoSuccess", "프로필이 생성되었습니다. 추가 정보를 입력해주세요.");
         return "redirect:/coach/profile";
     }
 
@@ -81,7 +31,7 @@ public class CoachWebController {
     public String profilePage(HttpSession session, Model model) {
         Long coachId = (Long) session.getAttribute("adminCoachId");
         if (coachId == null) {
-            return "redirect:/coach/setup";
+            return "redirect:/admin/login";
         }
         model.addAttribute("adminName", session.getAttribute("adminName"));
         model.addAttribute("adminRole", "COACH");
@@ -91,7 +41,6 @@ public class CoachWebController {
         model.addAttribute("noticeAction", "/coach/notice");
         model.addAttribute("backUrl", "/coach");
 
-        // 전역 예외 핸들러가 세션에 저장한 에러 메시지 처리
         Object infoError = session.getAttribute("infoError");
         if (infoError != null) {
             model.addAttribute("infoError", infoError);
@@ -115,7 +64,6 @@ public class CoachWebController {
 
         Long coachId = (Long) session.getAttribute("adminCoachId");
 
-        // 기존 이미지 URL 유지 (새 파일이 없으면)
         String imageUrl = contentService.getCoach(coachId).getProfileImageUrl();
         if (profileImage != null && !profileImage.isEmpty()) {
             try {
@@ -158,7 +106,7 @@ public class CoachWebController {
     public String bookingPage(HttpSession session, Model model) {
         Long coachId = (Long) session.getAttribute("adminCoachId");
         if (coachId == null) {
-            return "redirect:/coach/setup";
+            return "redirect:/admin/login";
         }
         model.addAttribute("adminId", session.getAttribute("adminId"));
         model.addAttribute("adminName", session.getAttribute("adminName"));

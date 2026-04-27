@@ -179,8 +179,6 @@
       <div class="form-subtitle">관리자 계정으로 로그인하세요.</div>
 
       <div th:if="${loginError}" class="msg msg-error" th:text="${loginError}"></div>
-      <div th:if="${registerSuccess}" class="msg msg-success" th:text="${registerSuccess}"></div>
-      <div th:if="${pwSuccess}" class="msg msg-success" th:text="${pwSuccess}"></div>
 
       <form method="post" action="/admin/login">
         <div class="form-group">
@@ -194,9 +192,6 @@
         <button type="submit" class="submit-btn">로그인</button>
       </form>
 
-      <div class="form-links">
-        <a href="/admin/change-password">비밀번호 변경</a>
-      </div>
     </div>
   </main>
 

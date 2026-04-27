@@ -6,6 +6,7 @@ import com.tcb_server.content.service.ContentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,36 +26,21 @@ public class PublicContentController {
     @GetMapping("/coaches")
     public ResponseEntity<List<Map<String, Object>>> getCoaches() {
         List<CoachInfo> coaches = contentService.getAllCoaches();
-        List<Map<String, Object>> result = coaches.stream().map(c -> {
-            Map<String, Object> map = new HashMap<>();
-            map.put("id", c.getId());
-            map.put("name", c.getName());
-            map.put("phone", c.getPhone());
-            map.put("profileImageUrl", c.getProfileImageUrl());
-            map.put("introduction", c.getIntroduction());
-            map.put("education", splitLines(c.getEducation()));
-            map.put("awards", splitLines(c.getAwards()));
-            map.put("certifications", splitLines(c.getCertifications()));
-            return map;
-        }).toList();
+        List<Map<String, Object>> result = coaches.stream().map(this::toMap).toList();
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/coach")
     public ResponseEntity<Map<String, Object>> getCoachInfo(@RequestParam Long coachId) {
         CoachInfo info = contentService.getCoach(coachId);
-        Map<String, Object> result = new HashMap<>();
-        if (info != null) {
-            result.put("id", info.getId());
-            result.put("name", info.getName());
-            result.put("phone", info.getPhone());
-            result.put("profileImageUrl", info.getProfileImageUrl());
-            result.put("introduction", info.getIntroduction());
-            result.put("education", splitLines(info.getEducation()));
-            result.put("awards", splitLines(info.getAwards()));
-            result.put("certifications", splitLines(info.getCertifications()));
-        }
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(info != null ? toMap(info) : new HashMap<>());
+    }
+
+    @GetMapping("/coaches/{username}")
+    public ResponseEntity<Map<String, Object>> getCoachByUsername(@PathVariable String username) {
+        CoachInfo info = contentService.getCoachByUsername(username);
+        if (info == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(toMap(info));
     }
 
     @GetMapping("/notice")
@@ -63,6 +49,20 @@ public class PublicContentController {
         Map<String, String> result = new HashMap<>();
         result.put("content", notice != null ? notice.getContent() : "");
         return ResponseEntity.ok(result);
+    }
+
+    private Map<String, Object> toMap(CoachInfo c) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", c.getId());
+        map.put("username", c.getUsername());
+        map.put("name", c.getName());
+        map.put("phone", c.getPhone());
+        map.put("profileImageUrl", c.getProfileImageUrl());
+        map.put("introduction", c.getIntroduction());
+        map.put("education", splitLines(c.getEducation()));
+        map.put("awards", splitLines(c.getAwards()));
+        map.put("certifications", splitLines(c.getCertifications()));
+        return map;
     }
 
     private List<String> splitLines(String text) {

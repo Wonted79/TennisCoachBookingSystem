@@ -12,8 +12,7 @@ public class AdminInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
 
         // 인증 없이 접근 가능한 경로
-        if (uri.equals("/admin/login") || uri.equals("/admin/logout") ||
-                uri.startsWith("/admin/change-password")) {
+        if (uri.equals("/swagger-ui/index.html") || uri.equals("/admin/login") || uri.equals("/admin/logout")) {
             return true;
         }
 

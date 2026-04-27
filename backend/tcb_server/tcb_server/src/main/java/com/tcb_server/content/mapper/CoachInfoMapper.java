@@ -10,6 +10,7 @@ import java.util.List;
 public interface CoachInfoMapper {
     CoachInfo findById(@Param("id") Long id);
     CoachInfo findByUserId(@Param("userId") Long userId);
+    CoachInfo findByUsername(@Param("username") String username);
     List<CoachInfo> findAll();
     void save(CoachInfo coach);
     void update(CoachInfo coach);

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class CoachInfo {
     private Long id;
     private Long userId;             // FK → users.id
+    private String username;         // from users.username (JOIN)
     private String name;
     private String phone;
     private String profileImageUrl;
