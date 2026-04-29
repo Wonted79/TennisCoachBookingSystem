@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="907299e6-10eb-4eee-af3d-55e403ec98dd" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/application-dev.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/application-prod.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -154,7 +151,7 @@
       <workItem from="1777081217293" duration="103000" />
       <workItem from="1777081334996" duration="10737000" />
       <workItem from="1777356306729" duration="3486000" />
-      <workItem from="1777426184961" duration="5321000" />
+      <workItem from="1777426184961" duration="5783000" />
     </task>
     <servers />
   </component>
