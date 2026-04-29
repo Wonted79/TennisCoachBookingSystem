@@ -368,9 +368,9 @@
     const DAY_KEYS = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
     const DAY_NAMES = { MON: '월', TUE: '화', WED: '수', THU: '목', FRI: '금', SAT: '토', SUN: '일' };
     const TIME_SLOTS = [];
-    for (let h = 6; h <= 21; h++) {
+    for (let h = 6; h < 22; h++) {
       TIME_SLOTS.push(String(h).padStart(2, '0') + ':00');
-      if (h < 21) TIME_SLOTS.push(String(h).padStart(2, '0') + ':30');
+      if (h < 22) TIME_SLOTS.push(String(h).padStart(2, '0') + ':30');
     }
 
     let reservations = {};
