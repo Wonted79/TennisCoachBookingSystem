@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>예약 관리 - 잠원 123테니스</title>
+  <title>예약 관리</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -302,7 +302,7 @@
     <span class="admin-name" th:text="${adminName} + '님'"></span>
     <span class="admin-badge">관리자 모드</span>
     <a th:href="@{/admin/coach/{id}(id=${coachId})}" class="logout-btn" style="text-decoration:none; padding: 7px 14px;">정보 편집</a>
-    <a href="/admin/main" class="logout-btn" style="text-decoration:none; padding: 7px 14px;">← 목록</a>
+    <a href="/admin" class="logout-btn" style="text-decoration:none; padding: 7px 14px;">← 목록</a>
     <form class="logout-form" method="post" action="/admin/logout">
       <button type="submit" class="logout-btn">로그아웃</button>
     </form>

@@ -7,6 +7,7 @@
     <list default="true" id="907299e6-10eb-4eee-af3d-55e403ec98dd" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/templates/admin/booking.html" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/templates/admin/booking.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcb_server/src/main/resources/templates/admin/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/tcb_server/src/main/resources/templates/admin/main.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +92,7 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/시선AI/OneDrive/바탕 화면/이계승/TennisCoachBookingSystem/backend/tcb_server&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/시선AI/OneDrive/바탕 화면/이계승1/TennisCoachBookingSystem/backend/tcb_server&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -150,8 +151,8 @@
       <workItem from="1777013449570" duration="5667000" />
       <workItem from="1777081217293" duration="103000" />
       <workItem from="1777081334996" duration="10737000" />
-      <workItem from="1777325433228" duration="684000" />
-      <workItem from="1777471994432" duration="315000" />
+      <workItem from="1777356306729" duration="3486000" />
+      <workItem from="1777426184961" duration="15765000" />
     </task>
     <servers />
   </component>

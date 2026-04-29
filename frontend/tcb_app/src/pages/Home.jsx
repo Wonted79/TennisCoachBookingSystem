@@ -55,15 +55,6 @@ function Home() {
           <ul>
             <li><a href="#programs">프로그램</a></li>
             <li><a href="#rules">레슨 규정</a></li>
-            <li>
-              <a
-                href="#home"
-                className="nav-cta"
-                onClick={(e) => { e.preventDefault(); handleBooking(); }}
-              >
-                예약하기
-              </a>
-            </li>
           </ul>
         </div>
       </nav>
