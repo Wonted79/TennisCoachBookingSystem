@@ -99,19 +99,6 @@ html { scroll-behavior: smooth; }
 
 .home-nav ul a:hover { color: var(--g800); }
 
-.nav-cta {
-  background: var(--g800) !important;
-  color: var(--white) !important;
-  padding: .55rem 1.3rem;
-  border-radius: var(--r-sm);
-  font-weight: 600 !important;
-  transition: background .2s, transform .2s !important;
-}
-
-.nav-cta:hover {
-  background: var(--g900) !important;
-  transform: translateY(-1px);
-}
 
 /* ===== HERO ===== */
 .hero {
@@ -440,6 +427,7 @@ section {
 
 .fee-table {
   width: 100%;
+  min-width: 480px;
   border-collapse: collapse;
   font-size: .88rem;
 }
@@ -696,10 +684,12 @@ section {
 }
 
 /* ===== RESPONSIVE ===== */
+
+/* --- tablet 900px --- */
 @media (max-width: 900px) {
   .hcp-card {
-    padding: 2.8rem 2.2rem;
-    width: 94%;
+    padding: 2.8rem 2.4rem;
+    width: 92%;
   }
 
   .hcp-creds {
@@ -711,15 +701,63 @@ section {
   }
 }
 
-@media (max-width: 640px) {
-  .home-nav ul { display: none; }
+/* --- small tablet 768px --- */
+@media (max-width: 768px) {
+  .nav-inner {
+    padding: 0 1.4rem;
+  }
 
-  section { padding: 4rem 1.2rem; }
+  .home-nav ul {
+    gap: 1.4rem;
+  }
+
+  .home-nav ul a {
+    font-size: .73rem;
+    letter-spacing: .05em;
+  }
+
+  section {
+    padding: 5rem 1.4rem;
+  }
 
   .hcp-card {
-    padding: 2rem 1.4rem;
-    width: 96%;
+    padding: 2.4rem 2rem;
+    width: 94%;
+  }
+
+  .hcp-photo-ring {
+    width: 140px; height: 140px;
+  }
+
+  .fee-table {
+    font-size: .83rem;
+  }
+}
+
+/* --- mobile landscape 640px --- */
+@media (max-width: 640px) {
+  .nav-inner {
+    padding: 0 1rem;
+  }
+
+  .home-nav ul {
+    gap: .9rem;
+  }
+
+  .home-nav ul a {
+    font-size: .68rem;
+    letter-spacing: .03em;
+  }
+
+  section {
+    padding: 3.8rem 1rem;
+  }
+
+  .hcp-card {
+    padding: 2rem 1.5rem;
+    width: 95%;
     border-radius: var(--r-lg);
+    margin: 1.4rem 0;
   }
 
   .hcp-top {
@@ -728,8 +766,20 @@ section {
     text-align: center;
   }
 
+  .hcp-identity {
+    align-items: center;
+  }
+
   .hcp-photo-ring {
-    width: 120px; height: 120px;
+    width: 116px; height: 116px;
+  }
+
+  .hcp-bio {
+    font-size: .86rem;
+  }
+
+  .hcp-cred-list li {
+    font-size: .78rem;
   }
 
   .hcp-book-btn {
@@ -737,8 +787,103 @@ section {
     justify-content: center;
   }
 
+  .fee-label {
+    padding: .8rem .9rem;
+  }
+
+  .fee-cell {
+    padding: .6rem .8rem;
+  }
+
+  .fee-freq {
+    font-size: .72rem;
+  }
+
   .footer-inner {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+/* --- mobile portrait 480px --- */
+@media (max-width: 480px) {
+  .home-nav ul {
+    display: none;
+  }
+
+  .nav-inner {
+    justify-content: center;
+  }
+
+  section {
+    padding: 3rem .85rem;
+  }
+
+  .hcp-card {
+    padding: 1.8rem 1.1rem;
+    width: 96%;
+  }
+
+  .hcp-photo-ring {
+    width: 96px; height: 96px;
+  }
+
+  .hcp-initial {
+    font-size: 2.6rem;
+  }
+
+  .hcp-name {
+    font-size: 1.85rem;
+  }
+
+  .hcp-bio {
+    font-size: .82rem;
+  }
+
+  .sec-title {
+    font-size: 1.55rem;
+  }
+
+  .fee-th-type {
+    width: 68px;
+    padding: .7rem .6rem;
+  }
+
+  .fee-th-time {
+    padding: .7rem .5rem;
+    font-size: .88rem;
+  }
+
+  .fee-label {
+    font-size: .78rem;
+    padding: .7rem .6rem;
+  }
+
+  .fee-cell {
+    padding: .5rem .5rem;
+  }
+
+  .fee-freq {
+    font-size: .65rem;
+  }
+
+  .fee-price {
+    font-size: .78rem;
+  }
+
+  .fee-notes {
+    padding: .9rem 1.1rem;
+  }
+
+  .fee-notes li {
+    font-size: .76rem;
+  }
+
+  .rule-card {
+    padding: 1.3rem;
+  }
+
+  .footer-links {
+    gap: 1.2rem;
   }
 }
