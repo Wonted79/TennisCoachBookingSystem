@@ -122,40 +122,42 @@ html { scroll-behavior: smooth; }
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url('../assets/hero_background_img.png');
+  background-size: cover;
+  background-position: center top;
 }
 
-/* layered dark-green background */
+/* dark overlay over tennis court photo */
 .hcp-bg-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, var(--g900) 0%, #1f4d33 45%, var(--g800) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 25, 14, 0.62) 0%,
+    rgba(10, 25, 14, 0.50) 50%,
+    rgba(10, 25, 14, 0.68) 100%
+  );
   z-index: 0;
 }
 
-/* floating orbs */
+/* subtle vignette orbs — kept very dim against photo */
 .hcp-orb {
   position: absolute;
   border-radius: 50%;
   z-index: 1;
-  animation: orbFloat 9s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .hcp-orb-1 {
-  width: 280px; height: 280px;
-  background: radial-gradient(circle at 40% 40%, rgba(200,217,106,.18), transparent 70%);
-  top: -60px; right: -40px;
+  width: 340px; height: 340px;
+  background: radial-gradient(circle at 40% 40%, rgba(200,217,106,.08), transparent 70%);
+  top: -80px; right: -60px;
 }
 
 .hcp-orb-2 {
-  width: 200px; height: 200px;
-  background: radial-gradient(circle at 60% 60%, rgba(82,183,136,.15), transparent 70%);
-  bottom: 40px; left: 30px;
-  animation-delay: -4s;
-}
-
-@keyframes orbFloat {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-20px) scale(1.05); }
+  width: 260px; height: 260px;
+  background: radial-gradient(circle at 60% 60%, rgba(82,183,136,.07), transparent 70%);
+  bottom: 60px; left: 40px;
 }
 
 /* loading */
@@ -192,9 +194,18 @@ html { scroll-behavior: smooth; }
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  padding: 3.5rem 3rem;
-  width: 100%;
-  max-width: 860px;
+  padding: 3.5rem 3.5rem;
+  width: 90%;
+  max-width: 880px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-radius: var(--r-xl);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  margin: 2rem 0;
 }
 
 /* top row: photo | identity+bio */
@@ -687,7 +698,8 @@ section {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .hcp-card {
-    padding: 3rem 2rem;
+    padding: 2.8rem 2.2rem;
+    width: 94%;
   }
 
   .hcp-creds {
@@ -705,7 +717,9 @@ section {
   section { padding: 4rem 1.2rem; }
 
   .hcp-card {
-    padding: 2.5rem 1.4rem;
+    padding: 2rem 1.4rem;
+    width: 96%;
+    border-radius: var(--r-lg);
   }
 
   .hcp-top {
