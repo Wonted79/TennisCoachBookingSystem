@@ -223,7 +223,7 @@ function Home() {
           </div>
 
           <ul className="fee-notes">
-            <li>사용기간 4주를 원칙으로 합니다 (우천 시 사용 가능)</li>
+            <li>사용기간 4주를 원칙으로 합니다 (우천 시 보충 사용 가능)</li>
             <li>당일 취소시 차감 (레슨 시간 24시간 기준)</li>
             <li>레슨 마지막 회차 재등록 부탁드립니다</li>
             <li>계좌번호 &nbsp;<strong>농협 302-1782-8867-11 &nbsp;최민주</strong></li>
@@ -281,6 +281,7 @@ function Home() {
           <div>
             <div className="footer-logo">123<span>Tennis</span></div>
             <div className="footer-addr">서울시 용산구 이촌동 &nbsp;·&nbsp; 이 주형 원장</div>
+            <div className="footer-addr">개발 비즈니스 문의:  lgs0004237@naver.com</div>
           </div>
           <ul className="footer-links">
             <li><a href="#programs">프로그램</a></li>
